@@ -19,7 +19,11 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
+		var shelf = this;
+		this.store = new MemoryStore(function()	{
+			shelf.renderHomeView();
+		});
+        //this.bindEvents();
     },
     // Bind Event Listeners
     //
@@ -45,5 +49,15 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+	renderHomeView = function()	{
+		var html = 
+				"<div class='header'><h1>Home</h1></div>" +
+				"<div class='search-view'>" +
+				"<input class='search-key'/>" +
+				"<ul class='employee-list'></ul>" +
+				"</div>"
+		$('body').html(html);
+		$('.search-key').on('keyup', $.proxy(this.findByName, this));
+	}
 };
