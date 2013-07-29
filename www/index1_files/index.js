@@ -1,4 +1,4 @@
-var a = $.getJSON("http://notamdemo.aim.nas.faa.gov/notamWFSTest/json?Designator=IAD", function(data)
+var a = $.getJSON("http://puneeth.org/docs/test.json", function(data)
     {
       var max = data.NOTAMs.Airports.IAD.length;
       var i;
