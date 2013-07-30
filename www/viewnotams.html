@@ -5,15 +5,43 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="junk.css" />
+        <link rel="stylesheet" type="text/css" href="other.css" />
+        <script>
+          $(document).ready(function() {
+              $('#topp').click(function() {
+                $('#panel').next().animate({width: 'toggle'});
+                                      });
+          });
+        </script>
+        <style type="text/css"> 
+        #panel
+        {
+        z-index: 190902;
+        padding:50px;
+        display:none;
+        text-align:center;
+        background-color:#e5eecc;
+        border:solid 1px #c3c3c3;
+        position:absolute;
+        height:100%;
+        }
+</style>
         <title>View Notams</title>
     </head>
     <body>
-   <div class="topMenu">
+    <article>
+   <div class="topMenu" id="topp">
       FNS App
     </div>
     <ul class="gNow" id="col1">
     <script type="text/javascript" src="index.js"></script>
     </ul>
-
+    </article>
+    <nav>
+          <ul>
+                  <li><a href="http://www.sitepoint.com/">SitePoint.com</a></li>
+                        <li><a href="http://www.sitepoint.com/css3-sliding-menu/">Revealing CSS3 Menu</a></li>
+                            </ul>
+                              </nav>
     </body>
 </html>
