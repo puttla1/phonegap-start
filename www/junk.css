@@ -40,7 +40,7 @@ ul.gNow {
   margin-top: 35px;
 }
 ul.gNow li {
-  width: 100%; /*previously 430px*/
+  width: 95%; /*previously 430px*/
   float: left;
   list-style: none;
   padding: 10px;
