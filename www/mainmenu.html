@@ -8,6 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="junk.css" /> -->
         <title>Main Menu</title>
 	<style>
+  body, html  {
+    width: 100%;
+    height: 100%;
+  }
 	body
 	{
 	  text-align: center;
@@ -27,24 +31,35 @@
 	  box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
 	  text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
 	  color: white;
-	  font-size: 19px;
+	  font-size: 70px;
 	  font-weight: bold;
 	  font-family: Segoe;
 	  text-decoration: none;
 	  vertical-align: middle;
-	  width: 25%;
+	  width: 45%;
 	  margin-bottom: 30px;
 	  margin-left:15px;
 	  margin-right:15px;
-	  height: 200px;
+	  height: 46%;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
 	}
 
+  button#topbutt
+  {
+    margin-top: 30px;
+  }
+
+  button:hover
+  {
+    opacity: 0.6;
+  }
+
 	</style>
-	
     </head>
     <body>
-	<button type="button"> View Notams </button>
-	<button type="button"> Search Notams </button>
+	<button class="topbutt" type="button" onclick="window.location.href='viewnotams.html'"> View Notams </button>
+	<button class="topbutt" type="button"> Search Notams </button>
 	</br>
 	<button type="button"> Settings </button>
 	

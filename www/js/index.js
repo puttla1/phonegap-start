@@ -1,63 +1,53 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+/**
+ * Copyright 2013 Kinvey, Inc.
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Common app functionality will be attached to the `app` namespace.
  */
 var app = {
-    // Application Constructor
-    initialize: function() {
-		var shelf = this;
-		this.store = new MemoryStore(function()	{
-			shelf.renderHomeView();
-		});
-        //this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+  /**
+   * Application constructor.
+   */
+  initialize: function() {
+    this.bindEvents();
+  },
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+  /**
+   * Bind event listeners.
+   */
+  bindEvents: function() {
+    // Bind any events that are required on startup. Common events are: `load`,
+    // `deviceready`, `offline`, and `online`.
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
 
-        console.log('Received Event: ' + id);
-    },
-	renderHomeView = function()	{
-		var html = 
-				"<div class='header'><h1>Home</h1></div>" +
-				"<div class='search-view'>" +
-				"<input class='search-key'/>" +
-				"<ul class='employee-list'></ul>" +
-				"</div>"
-		$('body').html(html);
-		$('.search-key').on('keyup', $.proxy(this.findByName, this));
-	}
+  /**
+   * The deviceready event handler.
+   */
+  onDeviceReady: function() {
+    // Initialize Kinvey. Paste your app key and secret below.
+    var promise = Kinvey.init({
+      appKey    : 'App Key',
+      appSecret : 'App Secret'
+    });
+    promise.then(function(activeUser) {
+      // The `Kinvey.init` function returns a promise which resolves to the
+      // active user data (or `null` if there is no active user).
+
+      // Your app is now connected to Kinvey.
+    });
+  }
 };
