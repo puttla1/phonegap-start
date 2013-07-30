@@ -37,19 +37,30 @@
 	  text-decoration: none;
 	  vertical-align: middle;
 	  width: 45%;
-    margin-top: 20px;
 	  margin-bottom: 30px;
 	  margin-left:15px;
 	  margin-right:15px;
-	  height: 47%;
+	  height: 46%;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
 	}
+
+  button#topbutt
+  {
+    margin-top: 30px;
+  }
+
+  button:hover
+  {
+    opacity: 0.6;
+  }
 
 	</style>
 	
     </head>
     <body>
-	<button type="button" onclick="window.location.href='viewnotams.html'"> View Notams </button>
-	<button type="button"> Search Notams </button>
+	<button class="topbutt" type="button" onclick="window.location.href='viewnotams.html'"> View Notams </button>
+	<button class="topbutt" type="button"> Search Notams </button>
 	</br>
 	<button type="button"> Settings </button>
 	
