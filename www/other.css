@@ -1,12 +1,14 @@
 article
 {
   position: fixed;
-  width: 70%;
+  width: 90.5%;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  padding: 4em;
+  padding-right: 4em;
+  padding-left: 4em;
+  padding-top: 2.5em;
   background-color: #fff;
   overflow: auto;
   z-index: 0;
@@ -70,11 +72,11 @@ nav ul
 
 article, article:after, nav, nav *
 {
-  -webkit-transition: all 600ms ease;
-  -moz-transition: all 600ms ease;
-  -ms-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
 }
 
 

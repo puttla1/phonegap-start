@@ -37,7 +37,7 @@ ul.gNow {
   height: 100%;
   float: left;
   padding: 0;
-  margin-top: 35px;
+  margin-top: 0;
 }
 ul.gNow li {
   width: 95%; /*previously 430px*/
@@ -47,7 +47,7 @@ ul.gNow li {
 }
 div.card {
   background: #ffffff;
-  width: 100%;
+  width: 106%;
   position: relative;
   padding: 15px;
   box-shadow: 0px 3px rgba( 0, 0, 0, 0.1 );
