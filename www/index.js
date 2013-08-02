@@ -2,6 +2,7 @@ var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/docs/test.json&callb
     {
       var max = data.contents.NOTAMs.Airports.IAD.length;
       var i;
+	$("#headtop").append(" NOTAMS: " + data.contents.NOTAMs.Airports.IAD.length);
 
       for(i = 0; i < max; i++)
 {
