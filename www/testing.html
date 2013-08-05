@@ -1,0 +1,56 @@
+<html>
+<head>
+<title></title>
+
+<script language="Javascript">
+function highlightOption(color){
+  var searchTerm = document.getElementById("searchbox");
+  var searchBounds = document.getElementById("fruitlist");
+
+  for(var i = 0; i < searchBounds.length; i++){
+    searchBounds[i].style.backgroundColor = "#FFFFFF"; //default color
+    if(searchBounds[i].value.toLowerCase() == searchTerm.value.toLowerCase()){
+      searchBounds[i].style.backgroundColor = color;
+    }
+  }
+}
+
+function highlightOption2(color){
+  var searchTerm = document.getElementById("searchbox");
+  var searchBounds = document.getElementById("fruitlist");
+
+  for(var i = 0; i < searchBounds.length; i++){
+    searchBounds[i].style.backgroundColor = "#FFFFFF"; //default color
+    if(searchBounds[i].value.toLowerCase() == searchTerm.value.toLowerCase()){
+      searchBounds[i].selected = true;
+      searchBounds[i].style.backgroundColor = color;
+      searchBounds.style.backgroundColor = color;
+    }
+  }
+}
+</script>
+
+</head>
+<body>
+
+<form>
+<select id="fruitlist">
+<option>Apple</option>
+<option>Blueberry</option>
+<option>Cherry</option>
+<option>Grape</option>
+<option>Lemon</option>
+<option>Mango</option>
+<option>Orange</option>
+<option>Peach</option>
+<option>Raspberry</option>
+<option>Strawberry</option>
+<option>Watermelon</option>
+</select>
+<input type="text" id="searchbox" />
+<input type="button" value="Search" onclick="highlightOption('#FFFF00')" />
+</form>
+
+</body>
+</html>
+
