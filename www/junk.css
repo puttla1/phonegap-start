@@ -47,13 +47,13 @@ ul.gNow li {
 }
 div.card {
   background: #ffffff;
-  width: 106%;
+  width: 100%;
   position: relative;
   padding: 15px;
   box-shadow: 0px 3px rgba( 0, 0, 0, 0.1 );
   font-family: Open Sans;
   color: #444;
-  font-size: 1.5em;
+  font-size: 35px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border: 1px solid #BBBBBB;
@@ -63,7 +63,7 @@ div.card {
     margin: 0 0 15px 0;
   }
   div.card p.card-title {
-    font-size: 2em;
+    font-size: 50px;
   }
   div.card p.url {
     border-top: 1px solid #e5e5e5;
