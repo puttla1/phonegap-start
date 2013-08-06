@@ -12,6 +12,7 @@ $(function() {
                                 optlist.append($('<option/>').attr('value', this[0]).text(this[1]));
                                       }
                       });
+            optlist.prepend($('<option/>').attr('value', '').text("Airport"));
                   
     });
           
