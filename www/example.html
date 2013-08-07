@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Two way drawers</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.mobile.min.js"></script>
+    <script src="../../content/shared/js/console.js"></script>
+    <link href="styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="http://puneeth.org/stylesheets/fnsapp.css" />
+    <link rel="stylesheet" href="http://puneeth.org/stylesheets/junk.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="http://puneeth.org/javascripts/fnsapp.js"> </script>
+    <script src=js/searchbar.js></script>
+    <script>
+      $(function() {
+    $("select").change(function() {
+      var code  = $(this).val();
+         var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/" + code + ".json&callback=?", function(data)
+        {
+         eval("var max = data.contents.NOTAMs.Airports." + code + ".length;");
+         var i;
+          eval("$(\"#headtop\").empty().append(\"" + code + " NOTAMS: \" + data.contents.NOTAMs.Airports." + code + ".length);");
+          eval("$(\"#num\").empty().append(\"Number of NOTAMs: \" + data.contents.NOTAMs.Airports." + code + ".length);");
+
+          $("#col1").empty();
+          for(i = 0; i < max; i++)
+          {
+            eval("$(\"#col1\").append(\'<li><div class =\\\"card\\\"><p class =\\\"card-title\\\">" + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p>\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p></div></li>\");");
+          }
+
+        });
+      });
+    });
+ 
+  </script>
+  <style>
+	h2
+	{
+		text-align: center;
+	}
+	.ui-btn	{
+		width: 50%;
+		height: 75%;
+		margin-left: auto;
+		margin-right: auto;
+		text-size: 75%;
+	}
+  </style>
+</head>
+<body>
+    <a href="../index.html">Back</a>
+    <div data-role="view" id="two-drawer-home" data-title="Friends">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#left-drawer" data-icon="comments" data-align="left"></a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+            <a data-role="button" data-rel="drawer" href="#right-drawer" data-icon="share" data-align="right"></a>
+        </div>
+    </header>
+    
+    <ul data-role="listview" data-type="group">
+        <li>
+            A
+            <ul>
+                <li><h2>Ann Devon</h2><img src="../../content/mobile/overview/ann.jpg" /></li>
+                <li><h2>Annette Roulet</h2><img src="../../content/mobile/overview/annette.jpg" /></li>
+                <li><h2>Antonio Moreno</h2><img src="../../content/mobile/overview/antonio.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            C
+            <ul>
+                <li><h2>Carine Schmitt</h2><img src="../../content/mobile/overview/carine.jpg" /></li>
+                <li><h2>Catherine Dewey</h2><img src="../../content/mobile/overview/catherine.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+           D
+            <ul>
+                <li><h2>Daniel Tonini</h2><img src="../../content/mobile/overview/daniel.jpg" /></li>
+                <li><h2>Diego Roel</h2><img src="../../content/mobile/overview/diego.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            E
+            <ul>
+                <li><h2>Eduardo Saavedra</h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
+                <li><h2>Elizabeth Brown</h2><img src="../../content/mobile/overview/elizabeth.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            F
+            <ul>
+                <li><h2>Felipe Izquierdo</h2><img src="../../content/mobile/overview/felipe.jpg" /></li>
+                <li><h2>Fran Wilson</h2><img src="../../content/mobile/overview/fran.jpg" /></li>
+                <li><h2>Francisco Chang</h2><img src="../../content/mobile/overview/francisco.jpg" /></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+<div data-role="drawer" id="left-drawer" style="width: 270px" data-title="Communities" data-views="['two-drawer-home', '@Url.Content("~/mobile/m/drawer/two-way-drawers.html")']">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    
+	<h2>Notams Info</h2>
+	<p id="num">Number of NOTAMs: </p>
+  <form>
+    <input id="airinput">
+  </form>
+  <br>
+	<select id="optlist" name="airport" form="airportsubmit" class="selectsearch" style="width=100%;">
+    <option value = "" > Airport </option>
+    <option value = "ABR"> ABR (Aberdeen, SD)</option>
+    <option value = "ABI"> ABI (Abilene, TX)</option>
+    <option value = "ADK"> ADK (Adak Island, AK)</option>
+    <option value = "KKI"> KKI (Akiachak, AK)</option>
+    <option value = "AKI"> AKI (Akiak, AK)</option>
+    <option value = "CAK"> CAK (Akron/Canton, OH)</option>
+    <option value = "KQA"> KQA (Akuton, AK)</option>
+    <option value = "AUK"> AUK (Alakanuk, AK)</option>
+    <option value = "ALM"> ALM (Alamogordo, NM)</option>
+    <option value = "ALS"> ALS (Alamosa, CO)</option>
+    <option value = "ALB"> ALB (Albany, NY)</option>
+    <option value = "CVO"> CVO (Albany, OR - Bus service)</option>
+    <option value = "QWY"> QWY (Albany, OR - Bus service)</option>
+    <option value = "ABQ"> ABQ (Albuquerque, NM)</option>
+    <option value = "WKK"> WKK (Aleknagik, AK)</option>
+    <option value = "AEX"> AEX (Alexandria, LA)</option>
+    <option value = "AET"> AET (Allakaket, AK)</option>
+    <option value = "ABE"> ABE (Allentown, PA)</option>
+    <option value = "AIA"> AIA (Alliance, NE)</option>
+    <option value = "APN"> APN (Alpena, MI)</option>
+    <option value = "AOO"> AOO (Altoona, PA)</option>
+    <option value = "AMA"> AMA (Amarillo, TX)</option>
+    <option value = "ABL"> ABL (Ambler, AK)</option>
+    <option value = "AKP"> AKP (Anaktueuk, AK)</option>
+    <option value = "ANC"> ANC (Anchorage, AK)</option>
+    <option value = "AGN"> AGN (Angoon, AK)</option>
+    <option value = "ANI"> ANI (Aniak, AK)</option>
+    <option value = "ANV"> ANV (Anvik, AK)</option>
+    <option value = "ATW"> ATW (Appleton, WI)</option>
+    <option value = "ACV"> ACV (Arcata, CA)</option>
+    <option value = "ARC"> ARC (Arctic Village, AK)</option>
+    <option value = "AVL"> AVL (Asheville, NC)</option>
+    <option value = "HTS"> HTS (Ashland, KY/Huntington, WV)</option>
+    <option value = "ASE"> ASE (Aspen, CO)</option>
+    <option value = "AHN"> AHN (Athens, GA)</option>
+    <option value = "AKB"> AKB (Atka, AK)</option>
+    <option value = "ATL"> ATL (Atlanta, GA)</option>
+    <option value = "AIY"> AIY (Atlantic City, NJ)</option>
+    <option value = "ATK"> ATK (Atqasuk, AK)</option>
+    <option value = "AGS"> AGS (Augusta, GA)</option>
+    <option value = "AUG"> AUG (Augusta, ME)</option>
+    <option value = "AUS"> AUS (Austin, TX)</option>
+    <option value = "BFL"> BFL (Bakersfield, CA)</option>
+    <option value = "BWI"> BWI (Baltimore, MD)</option>
+    <option value = "BGR"> BGR (Bangor, ME)</option>
+    <option value = "BHB"> BHB (Bar Harbour, ME)</option>
+    <option value = "BRW"> BRW (Barrow, AK)</option>
+    <option value = "BTI"> BTI (Barter Island, AK)</option>
+    <option value = "BTR"> BTR (Baton Rouge, LA)</option>
+    <option value = "MBS"> MBS (Bay City, MI)</option>
+    <option value = "BPT"> BPT (Beaumont/Port Arthur, TX)</option>
+    <option value = "ZBV"> ZBV (Beaver Creek, CO - Van service)</option>
+    <option value = "WBQ"> WBQ (Beaver, AK)</option>
+    <option value = "BKW"> BKW (Beckley, WV)</option>
+    <option value = "BED"> BED (Bedford, MA)</option>
+    <option value = "BLV"> BLV (Belleville, IL)</option>
+    <option value = "BLI"> BLI (Bellingham, WA)</option>
+    <option value = "BJI"> BJI (Bemidji, MN)</option>
+    <option value = "BEH"> BEH (Benton Harbor, MI)</option>
+    <option value = "BET"> BET (Bethel, AK)</option>
+    <option value = "ABE"> ABE (Bethlehem, PA)</option>
+    <option value = "BTT"> BTT (Bettles, AK)</option>
+    <option value = "BIL"> BIL (Billings, MT)</option>
+    <option value = "GPT"> GPT (Biloxi/Gulfport, MS)</option>
+    <option value = "BGM"> BGM (Binghamton, NY)</option>
+    <option value = "KBC"> KBC (Birch Creek, AK)</option>
+    <option value = "BHM"> BHM (Birmingham, AL)</option>
+    <option value = "BIS"> BIS (Bismarck, ND)</option>
+    <option value = "BID"> BID (Block Island, RI)</option>
+    <option value = "BMI"> BMI (Bloomington, IL)</option>
+    <option value = "BLF"> BLF (Bluefield, WV)</option>
+    <option value = "BOI"> BOI (Boise, ID)</option>
+    <option value = "BOS"> BOS (Boston, MA)</option>
+    <option value = "XHH"> XHH (Boulder, CO - Bus service)</option>
+    <option value = "WHH"> WHH (Boulder, CO - Hiltons Har H)</option>
+    <option value = "WBU"> WBU (Boulder, CO - Municipal Airport)</option>
+    <option value = "BYA"> BYA (Boundary, AK)</option>
+    <option value = "BWG"> BWG (Bowling Green, KY)</option>
+    <option value = "BZN"> BZN (Bozeman, MT)</option>
+    <option value = "BFD"> BFD (Bradford, PA)</option>
+    <option value = "BRD"> BRD (Brainerd, MN)</option>
+    <option value = "BWD"> BWD (Brawnwood, TX)</option>
+    <option value = "QKB"> QKB (Breckonridge, CO - Van service)</option>
+    <option value = "TRI"> TRI (Bristol, VA)</option>
+    <option value = "BKX"> BKX (Brookings, SD)</option>
+    <option value = "RBH"> RBH (Brooks Lodge, AK)</option>
+    <option value = "BRO"> BRO (Brownsville, TX)</option>
+    <option value = "BQK"> BQK (Brunswick, GA)</option>
+    <option value = "BKC"> BKC (Buckland, AK)</option>
+    <option value = "BUF"> BUF (Buffalo, NY)</option>
+    <option value = "IFP"> IFP (Bullhead City/Laughlin, AZ)</option>
+    <option value = "BUR"> BUR (Burbank, CA)</option>
+    <option value = "BRL"> BRL (Burlington, IA)</option>
+    <option value = "BTV"> BTV (Burlington, VT)</option>
+    <option value = "BTM"> BTM (Butte, MT)</option>
+    <option value = "CAK"> CAK (Canton/Akron, OH)</option>
+    <option value = "CGI"> CGI (Cape Girardeau, MO)</option>
+    <option value = "LUR"> LUR (Cape Lisburne, AK)</option>
+    <option value = "EHM"> EHM (Cape Newenham, AK)</option>
+    <option value = "MDH"> MDH (Carbondale, IL)</option>
+    <option value = "CLD"> CLD (Carlsbad, CA)</option>
+    <option value = "CNM"> CNM (Carlsbad, NM)</option>
+    <option value = "MRY"> MRY (Carmel, CA)</option>
+    <option value = "CPR"> CPR (Casper, WY)</option>
+    <option value = "CDC"> CDC (Cedar City, UT)</option>
+    <option value = "CID"> CID (Cedar Rapids, IA)</option>
+    <option value = "CEM"> CEM (Central, AK)</option>
+    <option value = "CDR"> CDR (Chadron, NE)</option>
+    <option value = "CIK"> CIK (Chalkyitsik, AK)</option>
+    <option value = "CMI"> CMI (Champaign/Urbana, IL)</option>
+    <option value = "CHS"> CHS (Charleston, SC)</option>
+    <option value = "CRW"> CRW (Charleston, WV)</option>
+    <option value = "CLT"> CLT (Charlotte, NC)</option>
+    <option value = "CHO"> CHO (Charlottesville, VA)</option>
+    <option value = "CHA"> CHA (Chattanooga, TN)</option>
+    <option value = "CYF"> CYF (Chefornak, AK)</option>
+    <option value = "VAK"> VAK (Chevak, AK)</option>
+    <option value = "CYS"> CYS (Cheyenne, WY)</option>
+    <option value = "CGX"> CGX (Chicago, IL - Meigs)</option>
+    <option value = "MDW"> MDW (Chicago, IL - Midway)</option>
+    <option value = "ORD"> ORD (Chicago, IL - O'Hare)</option>
+    <option value = "CKX"> CKX (Chicken, AK)</option>
+    <option value = "CIC"> CIC (Chico, CA)</option>
+    <option value = "KCG"> KCG (Chignik, AK - Fisheries)</option>
+    <option value = "KCQ"> KCQ (Chignik, AK -)</option>
+    <option value = "KCL"> KCL (Chignik, AK - Lagoon)</option>
+    <option value = "CZN"> CZN (Chisana, AK)</option>
+    <option value = "HIB"> HIB (Chisholm/Hibbing, MN)</option>
+    <option value = "CHU"> CHU (Chuathbaluk, AK)</option>
+    <option value = "CVG"> CVG (Cincinnati, OH)</option>
+    <option value = "CHP"> CHP (Circle Hot Springs, AK)</option>
+    <option value = "IRC"> IRC (Circle, AK)</option>
+    <option value = "CLP"> CLP (Clarks Point, AK)</option>
+    <option value = "CKB"> CKB (Clarksburg, WV)</option>
+    <option value = "PIE"> PIE (Clearwater/St Petersburg, FL)</option>
+    <option value = "CLE"> CLE (Cleveland, OH)</option>
+    <option value = "CVN"> CVN (Clovis, NM)</option>
+    <option value = "COD"> COD (Cody/Yellowstone, WY)</option>
+    <option value = "CFA"> CFA (Coffee Point, AK)</option>
+    <option value = "KCC"> KCC (Coffman Cove, AK)</option>
+    <option value = "CDB"> CDB (Cold Bay, AK)</option>
+    <option value = "CLL"> CLL (College Station, TX)</option>
+    <option value = "COS"> COS (Colorado Springs, CO)</option>
+    <option value = "COU"> COU (Columbia, MO)</option>
+    <option value = "CAE"> CAE (Columbia, SC)</option>
+    <option value = "CSG"> CSG (Columbus, GA)</option>
+    <option value = "GTR"> GTR (Columbus, MS)</option>
+    <option value = "CMH"> CMH (Columbus, OH)</option>
+    <option value = "CCR"> CCR (Concord, CA)</option>
+    <option value = "CNK"> CNK (Concordia, KS)</option>
+    <option value = "QCE"> QCE (Copper Mountain, CO - Van service)</option>
+    <option value = "CDV"> CDV (Cordova, AK)</option>
+    <option value = "CRP"> CRP (Corpus Christi, TX)</option>
+    <option value = "CEZ"> CEZ (Cortez, CO)</option>
+    <option value = "CGA"> CGA (Craig, AK)</option>
+    <option value = "CEC"> CEC (Crescent City, CA)</option>
+    <option value = "CKO"> CKO (Crooked Creek, AK)</option>
+    <option value = "CUW"> CUW (Cube Cove, AK)</option>
+    <option value = "CBE"> CBE (Cumberland, MD)</option>
+    <option value = "DFW"> DFW (Dallas/Fort Worth, TX)</option>
+    <option value = "DAY"> DAY (Dayton, OH)</option>
+    <option value = "DAB"> DAB (Daytona Beach, FL)</option>
+    <option value = "DEC"> DEC (Decatur, IL)</option>
+    <option value = "DRG"> DRG (Deering, AK)</option>
+    <option value = "DJN"> DJN (Delta Junction, AK)</option>
+    <option value = "DEN"> DEN (Denver, CO - International)</option>
+    <option value = "QWM"> QWM (Denver, CO - Longmont Bus service)</option>
+    <option value = "DSM"> DSM (Des Moines, IA)</option>
+    <option value = "DTW"> DTW (Detroit, MI - Metro/Wayne County)</option>
+    <option value = "DVL"> DVL (Devil's Lake, ND)</option>
+    <option value = "DIK"> DIK (Dickinson, ND)</option>
+    <option value = "DLG"> DLG (Dillingham, AK)</option>
+    <option value = "DDC"> DDC (Dodge City, KS)</option>
+    <option value = "DHN"> DHN (Dothan, AL)</option>
+    <option value = "DUJ"> DUJ (Dubois, PA)</option>
+    <option value = "DBQ"> DBQ (Dubuque, IA)</option>
+    <option value = "DLH"> DLH (Duluth, MN)</option>
+    <option value = "DRO"> DRO (Durango, CO)</option>
+    <option value = "RDU"> RDU (Durham, NC)</option>
+    <option value = "RDU"> RDU (Durham/Raleigh, NC)</option>
+    <option value = "DUT"> DUT (Dutch Harbor, AK)</option>
+    <option value = "ABE"> ABE (Easton, PA)</option>
+    <option value = "EAU"> EAU (Eau Claire, WI)</option>
+    <option value = "EDA"> EDA (Edna Bay, AK)</option>
+    <option value = "EEK"> EEK (Eek, AK)</option>
+    <option value = "KKU"> KKU (Ekuk, AK)</option>
+    <option value = "KEK"> KEK (Ekwok, AK)</option>
+    <option value = "IPL"> IPL (El Centro, CA)</option>
+    <option value = "ELD"> ELD (El Dorado, AR)</option>
+    <option value = "ELP"> ELP (El Paso, TX)</option>
+    <option value = "ELV"> ELV (Elfin Cove, AK)</option>
+    <option value = "ELI"> ELI (Elim, AK)</option>
+    <option value = "EKO"> EKO (Elko, NV)</option>
+    <option value = "ELM"> ELM (Elmira, NY)</option>
+    <option value = "LYU"> LYU (Ely, MN)</option>
+    <option value = "EMK"> EMK (Emmonak, AK)</option>
+    <option value = "BGM"> BGM (Endicott, NY)</option>
+    <option value = "WDG"> WDG (Enid, OK)</option>
+    <option value = "ERI"> ERI (Erie, PA)</option>
+    <option value = "ESC"> ESC (Escanaba, MI)</option>
+    <option value = "EUG"> EUG (Eugene, OR)</option>
+    <option value = "ACV"> ACV (Eureka/Arcata, CA)</option>
+    <option value = "EUE"> EUE (Eureka, NV)</option>
+    <option value = "EVV"> EVV (Evansville, IN)</option>
+    <option value = "FAI"> FAI (Fairbanks, AK)</option>
+    <option value = "FAR"> FAR (Fargo, ND)</option>
+    <option value = "FYV"> FYV (Fayetteville, AR - Municipal/Drake)</option>
+    <option value = "XNA"> XNA (Fayetteville, AR - Northwest Arkansas Regional)</option>
+    <option value = "FAY"> FAY (Fayetteville, NC)</option>
+    <option value = "FLG"> FLG (Flagstaff, AZ)</option>
+    <option value = "FNT"> FNT (Flint, MI)</option>
+    <option value = "FLO"> FLO (Florence, SC)</option>
+    <option value = "MSL"> MSL (Florence/Muscle Shoals/Sheffield, AL)</option>
+    <option value = "FNL"> FNL (Fort Collins/Loveland, CO - Municipal Airport)</option>
+    <option value = "QWF"> QWF (Fort Collins/Loveland, CO - Bus service)</option>
+    <option value = "FOD"> FOD (Fort Dodge, IA)</option>
+    <option value = "FLL"> FLL (Fort Lauderdale, FL)</option>
+    <option value = "TBN"> TBN (Fort Leonard Wood, MO)</option>
+    <option value = "RSW"> RSW (Fort Myers, FL)</option>
+    <option value = "FSM"> FSM (Fort Smith, AR)</option>
+    <option value = "VPS"> VPS (Fort Walton Beach, FL)</option>
+    <option value = "FWA"> FWA (Fort Wayne, IN)</option>
+    <option value = "DFW"> DFW (Fort Worth/Dallas, TX)</option>
+    <option value = "FKL"> FKL (Franklin, PA)</option>
+    <option value = "FAT"> FAT (Fresno, CA)</option>
+    <option value = "GNV"> GNV (Gainesville, FL)</option>
+    <option value = "GUP"> GUP (Gallup, NM)</option>
+    <option value = "GCK"> GCK (Garden City, KS)</option>
+    <option value = "GYY"> GYY (Gary, IN)</option>
+    <option value = "GCC"> GCC (Gillette, WY)</option>
+    <option value = "GGG"> GGG (Gladewater/Kilgore, TX)</option>
+    <option value = "GGW"> GGW (Glasgow, MT)</option>
+    <option value = "GDV"> GDV (Glendive, MT)</option>
+    <option value = "GLV"> GLV (Golovin, AK)</option>
+    <option value = "GNU"> GNU (Goodnews Bay, AK)</option>
+    <option value = "JGC"> JGC (Grand Canyon, AZ - Heliport)</option>
+    <option value = "GCN"> GCN (Grand Canyon, AZ - National Park)</option>
+    <option value = "GFK"> GFK (Grand Forks, ND)</option>
+    <option value = "GRI"> GRI (Grand Island, NE)</option>
+    <option value = "GJT"> GJT (Grand Junction, CO)</option>
+    <option value = "GRR"> GRR (Grand Rapids, MI)</option>
+    <option value = "GPZ"> GPZ (Grand Rapids, MN)</option>
+    <option value = "KGX"> KGX (Grayling, AK)</option>
+    <option value = "GTF"> GTF (Great Falls, MT)</option>
+    <option value = "GRB"> GRB (Green Bay, WI)</option>
+    <option value = "GSO"> GSO (Greensboro, NC)</option>
+    <option value = "GLH"> GLH (Greenville, MS)</option>
+    <option value = "PGV"> PGV (Greenville, NC)</option>
+    <option value = "GSP"> GSP (Greenville/Spartanburg, SC)</option>
+    <option value = "GON"> GON (Groton/New London, CT)</option>
+    <option value = "GPT"> GPT (Gulfport, MS)</option>
+    <option value = "GUC"> GUC (Gunnison, CO)</option>
+    <option value = "GST"> GST (Gustavus, AK)</option>
+    <option value = "HGR"> HGR (Hagerstown, MD)</option>
+    <option value = "SUN"> SUN (Hailey, ID)</option>
+    <option value = "HNS"> HNS (Haines, AK)</option>
+    <option value = "PHF"> PHF (Hampton, VA)</option>
+    <option value = "HNM"> HNM (Hana, HI - Island of Maui)</option>
+    <option value = "PAK"> PAK (Hanapepe, HI)</option>
+    <option value = "CMX"> CMX (Hancock, MI)</option>
+    <option value = "LEB"> LEB (Hanover, NH)</option>
+    <option value = "HRL"> HRL (Harlingen, TX)</option>
+    <option value = "MDT"> MDT (Harrisburg, PA)</option>
+    <option value = "HRO"> HRO (Harrison, AR)</option>
+    <option value = "BDL"> BDL (Hartford, CT)</option>
+    <option value = "HAE"> HAE (Havasupai, AZ)</option>
+    <option value = "HVR"> HVR (Havre, MT)</option>
+    <option value = "HDN"> HDN (Hayden, CO)</option>
+    <option value = "HYS"> HYS (Hays, KS)</option>
+    <option value = "HKB"> HKB (Healy Lake, AK)</option>
+    <option value = "HLN"> HLN (Helena, MT)</option>
+    <option value = "AVL"> AVL (Hendersonville, NC)</option>
+    <option value = "HIB"> HIB (Hibbing/Chisholm, MN)</option>
+    <option value = "HKY"> HKY (Hickory, NC)</option>
+    <option value = "GSO"> GSO (High Point, NC)</option>
+    <option value = "ITO"> ITO (Hilo, HI - Island of Hawaii)</option>
+    <option value = "HHH"> HHH (Hilton Head, SC)</option>
+    <option value = "HBB"> HBB (Hobbs, NM)</option>
+    <option value = "HYL"> HYL (Hollis, AK)</option>
+    <option value = "HCR"> HCR (Holy Cross, AK)</option>
+    <option value = "HOM"> HOM (Homer, AK)</option>
+    <option value = "HNL"> HNL (Honolulu, HI - Island of Oahu)</option>
+    <option value = "MKK"> MKK (Hoolehua, HI - Island of Molokai)</option>
+    <option value = "HNH"> HNH (Hoonah, AK)</option>
+    <option value = "HPB"> HPB (Hooper Bay, AK)</option>
+    <option value = "HOT"> HOT (Hot Springs, AR)</option>
+    <option value = "HOU"> HOU (Houston, TX - Hobby)</option>
+    <option value = "IAH"> IAH (Houston, TX - Intercontinental)</option>
+    <option value = "HUS"> HUS (Hughes, AK)</option>
+    <option value = "HTS"> HTS (Huntington, WV/Ashland, KY)</option>
+    <option value = "HSV"> HSV (Huntsville, AL)</option>
+    <option value = "HON"> HON (Huron, SD)</option>
+    <option value = "HSL"> HSL (Huslia, AK)</option>
+    <option value = "HYA"> HYA (Hyannis, MA)</option>
+    <option value = "HYG"> HYG (Hydaburg, AK)</option>
+    <option value = "IDA"> IDA (Idaho Falls, ID)</option>
+    <option value = "IGG"> IGG (Igiugig, AK)</option>
+    <option value = "ILI"> ILI (Iliamna, AK)</option>
+    <option value = "IPL"> IPL (Imperial, CA)</option>
+    <option value = "IND"> IND (Indianapolis, IN)</option>
+    <option value = "INL"> INL (International Falls, MN)</option>
+    <option value = "IYK"> IYK (Inyokern, CA)</option>
+    <option value = "IMT"> IMT (Iron Mountain, MI)</option>
+    <option value = "IWD"> IWD (Ironwood, MI)</option>
+    <option value = "ISP"> ISP (Islip, NY)</option>
+    <option value = "ITH"> ITH (Ithaca, NY)</option>
+    <option value = "JAC"> JAC (Jackson Hole, WY)</option>
+    <option value = "JAN"> JAN (Jackson, MS)</option>
+    <option value = "MKL"> MKL (Jackson, TN)</option>
+    <option value = "JAX"> JAX (Jacksonville, FL)</option>
+    <option value = "OAJ"> OAJ (Jacksonville, NC)</option>
+    <option value = "JMS"> JMS (Jamestown, ND)</option>
+    <option value = "JHW"> JHW (Jamestown, NY)</option>
+    <option value = "JVL"> JVL (Janesville, WI)</option>
+    <option value = "BGM"> BGM (Johnson City, NY)</option>
+    <option value = "TRI"> TRI (Johnson City, TN)</option>
+    <option value = "JST"> JST (Johnstown, PA)</option>
+    <option value = "JBR"> JBR (Jonesboro, AR)</option>
+    <option value = "JLN"> JLN (Joplin, MO)</option>
+    <option value = "JNU"> JNU (Juneau, AK)</option>
+    <option value = "OGG"> OGG (Kahului, HI - Island of Maui,)</option>
+    <option value = "KAE"> KAE (Kake, AK)</option>
+    <option value = "KNK"> KNK (Kakhonak, AK)</option>
+    <option value = "AZO"> AZO (Kalamazoo, MI)</option>
+    <option value = "LUP"> LUP (Kalaupapa, HI - Island of Molokai,)</option>
+    <option value = "KLG"> KLG (Kalskag, AK)</option>
+    <option value = "KAL"> KAL (Kaltag, AK)</option>
+    <option value = "MUE"> MUE (Kamuela, HI - Island of Hawaii,)</option>
+    <option value = "MCI"> MCI (Kansas City, MO)</option>
+    <option value = "JHM"> JHM (Kapalua, HI - Island of Maui,)</option>
+    <option value = "KXA"> KXA (Kasaan, AK)</option>
+    <option value = "KUK"> KUK (Kasigluk, AK)</option>
+    <option value = "LIH"> LIH (Kauai Island/Lihue, HI)</option>
+    <option value = "EAR"> EAR (Kearney, NE)</option>
+    <option value = "EEN"> EEN (Keene, NH)</option>
+    <option value = "ENA"> ENA (Kenai, AK)</option>
+    <option value = "KTN"> KTN (Ketchikan, AK)</option>
+    <option value = "EYW"> EYW (Key West, FL)</option>
+    <option value = "QKS"> QKS (Keystone, CO - Van service)</option>
+    <option value = "IAN"> IAN (Kiana, AK)</option>
+    <option value = "GGG"> GGG (Kilgore/Gladewater, TX)</option>
+    <option value = "ILE"> ILE (Killeen, TX)</option>
+    <option value = "KVC"> KVC (King Cove, AK)</option>
+    <option value = "AKN"> AKN (King Salmon, AK)</option>
+    <option value = "IGM"> IGM (Kingman, AZ)</option>
+    <option value = "TRI"> TRI (Kingsport, TN)</option>
+    <option value = "KPN"> KPN (Kipnuk, AK)</option>
+    <option value = "IRK"> IRK (Kirksville, MO)</option>
+    <option value = "KVL"> KVL (Kivalina, AK)</option>
+    <option value = "LMT"> LMT (Klamath Falls, OR)</option>
+    <option value = "KLW"> KLW (Klawock, AK)</option>
+    <option value = "TYS"> TYS (Knoxville, TN)</option>
+    <option value = "OBU"> OBU (Kobuk, AK)</option>
+    <option value = "ADQ"> ADQ (Kodiak, AK)</option>
+    <option value = "KOA"> KOA (Kona, HI - Island of Hawaii)</option>
+    <option value = "KKH"> KKH (Kongiganak, AK)</option>
+    <option value = "KOT"> KOT (Kotlik, AK)</option>
+    <option value = "OTZ"> OTZ (Kotzebue, AK)</option>
+    <option value = "KYU"> KYU (Koyukuk, AK)</option>
+    <option value = "KWT"> KWT (Kwethluk, AK)</option>
+    <option value = "KWK"> KWK (Kwigillingok, AK)</option>
+    <option value = "LSE"> LSE (La Crosse, WI)</option>
+    <option value = "LAF"> LAF (Lafayette, IN)</option>
+    <option value = "LFT"> LFT (Lafayette, LA)</option>
+    <option value = "LCH"> LCH (Lake Charles, LA)</option>
+    <option value = "HII"> HII (Lake Havasu City, AZ)</option>
+    <option value = "LMA"> LMA (Lake Minchumina, AK)</option>
+    <option value = "LNY"> LNY (Lanai City, HI - Island of Lanai)</option>
+    <option value = "LNS"> LNS (Lancaster, PA)</option>
+    <option value = "LAN"> LAN (Lansing, MI)</option>
+    <option value = "LAR"> LAR (Laramie, WY)</option>
+    <option value = "LRD"> LRD (Laredo, TX)</option>
+    <option value = "LAS"> LAS (Las Vegas, NV)</option>
+    <option value = "LBE"> LBE (Latrobe, PA)</option>
+    <option value = "PIB"> PIB (Laurel, MS)</option>
+    <option value = "LAW"> LAW (Lawton, OK)</option>
+    <option value = "LEB"> LEB (Lebanon, NH)</option>
+    <option value = "KLL"> KLL (Levelock, AK)</option>
+    <option value = "LWB"> LWB (Lewisburg, WV)</option>
+    <option value = "LWS"> LWS (Lewiston, ID)</option>
+    <option value = "LWT"> LWT (Lewistown, MT)</option>
+    <option value = "LEX"> LEX (Lexington, KY)</option>
+    <option value = "LBL"> LBL (Liberal, KS)</option>
+    <option value = "LIH"> LIH (Lihue, HI - Island of Kaui)</option>
+    <option value = "LNK"> LNK (Lincoln, NE)</option>
+    <option value = "LIT"> LIT (Little Rock, AR)</option>
+    <option value = "LGB"> LGB (Long Beach, CA)</option>
+    <option value = "GGG"> GGG (Longview, TX)</option>
+    <option value = "LPS"> LPS (Lopez Island, WA)</option>
+    <option value = "LAX"> LAX (Los Angeles, CA)</option>
+    <option value = "SDF"> SDF (Louisville, KY)</option>
+    <option value = "FNL "> FNL  (Loveland/Fort Collins, CO - Municipal Airport)</option>
+    <option value = "QWF"> QWF (Loveland/Fort Collins, CO - Bus service)</option>
+    <option value = "LBB"> LBB (Lubbock, TX)</option>
+    <option value = "MCN"> MCN (Macon, GA)</option>
+    <option value = "MSN"> MSN (Madison, WI)</option>
+    <option value = "MDJ"> MDJ (Madras, OR)</option>
+    <option value = "MHT"> MHT (Manchester, NH)</option>
+    <option value = "MHK"> MHK (Manhattan, KS)</option>
+    <option value = "MBL"> MBL (Manistee, MI)</option>
+    <option value = "MKT"> MKT (Mankato, MN)</option>
+    <option value = "MLY"> MLY (Manley Hot Springs, AK)</option>
+    <option value = "KMO"> KMO (Manokotak, AK)</option>
+    <option value = "PKB"> PKB (Marietta, OH/Parkersburg, WV)</option>
+    <option value = "MWA"> MWA (Marion, IL)</option>
+    <option value = "MQT"> MQT (Marquette, MI)</option>
+    <option value = "MLL"> MLL (Marshall, AK)</option>
+    <option value = "MVY"> MVY (Martha's Vineyard, MA)</option>
+    <option value = "AOO"> AOO (Martinsburg, PA)</option>
+    <option value = "MCW"> MCW (Mason City, IA)</option>
+    <option value = "MSS"> MSS (Massena, NY)</option>
+    <option value = "OGG"> OGG (Maui, HI)</option>
+    <option value = "MFE"> MFE (Mcallen, TX)</option>
+    <option value = "MCK"> MCK (Mccook, NE)</option>
+    <option value = "MCG"> MCG (Mcgrath, AK)</option>
+    <option value = "MFR"> MFR (Medford, OR)</option>
+    <option value = "MYU"> MYU (Mekoryuk, AK)</option>
+    <option value = "MLB"> MLB (Melbourne, FL)</option>
+    <option value = "MEM"> MEM (Memphis, TN)</option>
+    <option value = "MCE"> MCE (Merced, CA)</option>
+    <option value = "MEI"> MEI (Meridian, MS)</option>
+    <option value = "MTM"> MTM (Metlakatla, AK)</option>
+    <option value = "WMK"> WMK (Meyers Chuck, AK)</option>
+    <option value = "MIA"> MIA (Miami, FL - International)</option>
+    <option value = "MPB"> MPB (Miami, FL - Sea Plane Base)</option>
+    <option value = "MBS"> MBS (Midland, MI)</option>
+    <option value = "MAF"> MAF (Midland/Odessa, TX)</option>
+    <option value = "MLS"> MLS (Miles City, MT)</option>
+    <option value = "MKE"> MKE (Milwaukee, WI)</option>
+    <option value = "MSP"> MSP (Minneapolis, MN)</option>
+    <option value = "MOT"> MOT (Minot, ND)</option>
+    <option value = "MNT"> MNT (Minto, AK)</option>
+    <option value = "MFE"> MFE (Mission, TX)</option>
+    <option value = "MSO"> MSO (Missoula, MT)</option>
+    <option value = "CNY"> CNY (Moab, UT)</option>
+    <option value = "MOB"> MOB (Mobile, AL)</option>
+    <option value = "MOD"> MOD (Modesto, CA)</option>
+    <option value = "MLI"> MLI (Moline, IL)</option>
+    <option value = "MLU"> MLU (Monroe, LA)</option>
+    <option value = "MRY"> MRY (Monterey, CA)</option>
+    <option value = "MGM"> MGM (Montgomery, AL)</option>
+    <option value = "MTJ"> MTJ (Montrose, CO)</option>
+    <option value = "MGW"> MGW (Morgantown, WV)</option>
+    <option value = "MWH"> MWH (Moses Lake, WA)</option>
+    <option value = "WMH"> WMH (Mountain Home, AR)</option>
+    <option value = "MOU"> MOU (Mountain Village, AK)</option>
+    <option value = "MSL"> MSL (Muscle Shoals, AL)</option>
+    <option value = "MKG"> MKG (Muskegon, MI)</option>
+    <option value = "MYR"> MYR (Myrtle Beach, SC)</option>
+    <option value = "ACK"> ACK (Nantucket, MA)</option>
+    <option value = "WNA"> WNA (Napakiak, AK)</option>
+    <option value = "PKA"> PKA (Napaskiak, AK)</option>
+    <option value = "APF"> APF (Naples, FL)</option>
+    <option value = "BNA"> BNA (Nashville, TN)</option>
+    <option value = "NKI"> NKI (Naukiti, AK)</option>
+    <option value = "NLG"> NLG (Nelson Lagoon, AK)</option>
+    <option value = "NCN"> NCN (New Chenega, AK)</option>
+    <option value = "HVN"> HVN (New Haven, CT)</option>
+    <option value = "KGK"> KGK (New Koliganek, AK)</option>
+    <option value = "GON"> GON (New London)</option>
+    <option value = "MSY"> MSY (New Orleans, LA)</option>
+    <option value = "KNW"> KNW (New Stuyahok, AK)</option>
+    <option value = "JFK"> JFK (New York, NY - Kennedy)</option>
+    <option value = "LGA"> LGA (New York, NY - La Guardia)</option>
+    <option value = "EWR"> EWR (Newark, NJ)</option>
+    <option value = "SWF"> SWF (Newburgh/Stewart Field, NY)</option>
+    <option value = "PHF"> PHF (Newport News, VA)</option>
+    <option value = "WWT"> WWT (Newtok, AK)</option>
+    <option value = "NME"> NME (Nightmute, AK)</option>
+    <option value = "NIB"> NIB (Nikolai, AK)</option>
+    <option value = "IKO"> IKO (Nikolski, AK)</option>
+    <option value = "WTK"> WTK (Noatak, AK)</option>
+    <option value = "OME"> OME (Nome, AK)</option>
+    <option value = "NNL"> NNL (Nondalton, AK)</option>
+    <option value = "ORV"> ORV (Noorvik, AK)</option>
+    <option value = "OFK"> OFK (Norfolk, NE)</option>
+    <option value = "ORF"> ORF (Norfolk, VA)</option>
+    <option value = "OTH"> OTH (North Bend, OR)</option>
+    <option value = "LBF"> LBF (North Platte, NE)</option>
+    <option value = "ORT"> ORT (Northway, AK)</option>
+    <option value = "NUI"> NUI (Nuiqsut, AK)</option>
+    <option value = "NUL"> NUL (Nulato, AK)</option>
+    <option value = "NUP"> NUP (Nunapitchuk, AK)</option>
+    <option value = "OAK"> OAK (Oakland, CA)</option>
+    <option value = "MAF"> MAF (Odessa/Midland, TX)</option>
+    <option value = "OGS"> OGS (Ogdensburg, NY)</option>
+    <option value = "OKC"> OKC (Oklahoma City, OK)</option>
+    <option value = "OMA"> OMA (Omaha, NE)</option>
+    <option value = "ONT"> ONT (Ontario, CA)</option>
+    <option value = "SNA"> SNA (Orange County, CA)</option>
+    <option value = "ORL"> ORL (Orlando, FL - Herndon)</option>
+    <option value = "MCO"> MCO (Orlando, FL - International)</option>
+    <option value = "OSH"> OSH (Oshkosh, WI)</option>
+    <option value = "OTM"> OTM (Ottumwa, IA)</option>
+    <option value = "OWB"> OWB (Owensboro, KY)</option>
+    <option value = "OXR"> OXR (Oxnard/Ventura, CA)</option>
+    <option value = "PAH"> PAH (Paducah, KY)</option>
+    <option value = "PGA"> PGA (Page, AZ)</option>
+    <option value = "PSP"> PSP (Palm Springs, CA)</option>
+    <option value = "PFN"> PFN (Panama City, FL)</option>
+    <option value = "PKB"> PKB (Parkersburg, WV/Marietta, OH)</option>
+    <option value = "PSC"> PSC (Pasco, WA)</option>
+    <option value = "PDB"> PDB (Pedro Bay, AK)</option>
+    <option value = "PEC"> PEC (Pelican, AK)</option>
+    <option value = "PLN"> PLN (Pellston, MI)</option>
+    <option value = "PDT"> PDT (Pendleton, OR)</option>
+    <option value = "PNS"> PNS (Pensacola, FL)</option>
+    <option value = "PIA"> PIA (Peoria, IL)</option>
+    <option value = "KPV"> KPV (Perryville, AK)</option>
+    <option value = "PSG"> PSG (Petersburg, AK)</option>
+    <option value = "PHL"> PHL (Philadelphia, PA - International)</option>
+    <option value = "TTN"> TTN (Philadelphia, PA - Trenton/Mercer NJ)</option>
+    <option value = "PHX"> PHX (Phoenix, AZ)</option>
+    <option value = "PIR"> PIR (Pierre, SD)</option>
+    <option value = "UGB"> UGB (Pilot Point, AK - Ugashnik Bay)</option>
+    <option value = "PIP"> PIP (Pilot Point, AK)</option>
+    <option value = "PQS"> PQS (Pilot Station, AK)</option>
+    <option value = "PIT"> PIT (Pittsburgh, PA)</option>
+    <option value = "PTU"> PTU (Platinum, AK)</option>
+    <option value = "PLB"> PLB (Plattsburgh, NY)</option>
+    <option value = "PIH"> PIH (Pocatello, ID)</option>
+    <option value = "KPB"> KPB (Point Baker, AK)</option>
+    <option value = "PHO"> PHO (Point Hope, AK)</option>
+    <option value = "PIZ"> PIZ (Point Lay, AK)</option>
+    <option value = "PNC"> PNC (Ponca City, OK)</option>
+    <option value = "PSE"> PSE (Ponce, Puerto Rico)</option>
+    <option value = "PTA"> PTA (Port Alsworth, AK)</option>
+    <option value = "CLM"> CLM (Port Angeles, WA)</option>
+    <option value = "BPT"> BPT (Port Arthur/Beaumont, TX)</option>
+    <option value = "KPC"> KPC (Port Clarence, AK)</option>
+    <option value = "PTH"> PTH (Port Heiden, AK)</option>
+    <option value = "PML"> PML (Port Moller, AK)</option>
+    <option value = "PPV"> PPV (Port Protection, AK)</option>
+    <option value = "PCA"> PCA (Portage Creek, AK)</option>
+    <option value = "PWM"> PWM (Portland, ME)</option>
+    <option value = "PDX"> PDX (Portland, OR)</option>
+    <option value = "PSM"> PSM (Portsmouth, NH)</option>
+    <option value = "POU"> POU (Poughkeepsie, NY)</option>
+    <option value = "PRC"> PRC (Prescott, AZ)</option>
+    <option value = "PQI"> PQI (Presque Isle, ME)</option>
+    <option value = "BLF"> BLF (Princeton, WV)</option>
+    <option value = "PVD"> PVD (Providence, RI)</option>
+    <option value = "PVC"> PVC (Provincetown, MA)</option>
+    <option value = "SCC"> SCC (Prudhoe Bay/Deadhorse, AK)</option>
+    <option value = "PUB"> PUB (Pueblo, CO)</option>
+    <option value = "PUW"> PUW (Pullman, WA)</option>
+    <option value = "UIN"> UIN (Quincy, IL)</option>
+    <option value = "KWN"> KWN (Quinhagak, AK)</option>
+    <option value = "RDU"> RDU (Raleigh/Durham, NC)</option>
+    <option value = "RMP"> RMP (Rampart, AK)</option>
+    <option value = "RAP"> RAP (Rapid City, SD)</option>
+    <option value = "RDG"> RDG (Reading, PA)</option>
+    <option value = "RDV"> RDV (Red Devil, AK)</option>
+    <option value = "RDD"> RDD (Redding, CA)</option>
+    <option value = "RDM"> RDM (Redmond, OR)</option>
+    <option value = "RNO"> RNO (Reno, NV)</option>
+    <option value = "RHI"> RHI (Rhinelander, WI,)</option>
+    <option value = "RIC"> RIC (Richmond, VA)</option>
+    <option value = "RIW"> RIW (Riverton, WY)</option>
+    <option value = "ROA"> ROA (Roanoke, VA)</option>
+    <option value = "RCE"> RCE (Roche Harbor, WA)</option>
+    <option value = "RST"> RST (Rochester, MN)</option>
+    <option value = "ROC"> ROC (Rochester, NY)</option>
+    <option value = "RKS"> RKS (Rock Springs, WY)</option>
+    <option value = "ZRF"> ZRF (Rockford, IL - Park&Ride Bus)</option>
+    <option value = "ZRK"> ZRK (Rockford, IL - Van Galder Bus)</option>
+    <option value = "RKD"> RKD (Rockland, ME)</option>
+    <option value = "RSJ"> RSJ (Rosario, WA)</option>
+    <option value = "ROW"> ROW (Roswell, NM)</option>
+    <option value = "RBY"> RBY (Ruby, AK)</option>
+    <option value = "RSH"> RSH (Russian Mission, AK)</option>
+    <option value = "RUT"> RUT (Rutland, VT)</option>
+    <option value = "SMF"> SMF (Sacramento, CA)</option>
+    <option value = "MBS"> MBS (Saginaw, MI)</option>
+    <option value = "STC"> STC (Saint Cloud, MN)</option>
+    <option value = "STG"> STG (Saint George Island, AK)</option>
+    <option value = "SGU"> SGU (Saint George, UT)</option>
+    <option value = "STL"> STL (Saint Louis, MO)</option>
+    <option value = "KSM"> KSM (Saint Mary's, AK)</option>
+    <option value = "SMK"> SMK (Saint Michael, AK)</option>
+    <option value = "SNP"> SNP (Saint Paul Island, AK)</option>
+    <option value = "SLE"> SLE (Salem, OR)</option>
+    <option value = "SLN"> SLN (Salina, KS)</option>
+    <option value = "SBY"> SBY (Salisbury-Ocean City, MD)</option>
+    <option value = "SLC"> SLC (Salt Lake City, UT)</option>
+    <option value = "SJT"> SJT (San Angelo, TX)</option>
+    <option value = "SAT"> SAT (San Antonio, TX)</option>
+    <option value = "SAN"> SAN (San Diego, CA)</option>
+    <option value = "SFO"> SFO (San Francisco, CA)</option>
+    <option value = "SJC"> SJC (San Jose, CA)</option>
+    <option value = "SJU"> SJU (San Juan, Puerto Rico)</option>
+    <option value = "SBP"> SBP (San Luis Obispo, CA)</option>
+    <option value = "SDP"> SDP (Sand Point, AK)</option>
+    <option value = "SNA"> SNA (Santa Ana, CA)</option>
+    <option value = "SBA"> SBA (Santa Barbara, CA)</option>
+    <option value = "SAF"> SAF (Santa Fe, NM)</option>
+    <option value = "SMX"> SMX (Santa Maria, CA)</option>
+    <option value = "STS"> STS (Santa Rosa, CA)</option>
+    <option value = "SLK"> SLK (Saranac Lake, NY)</option>
+    <option value = "SRQ"> SRQ (Sarasota, FL)</option>
+    <option value = "CIU"> CIU (Sault Ste Marie, MI,)</option>
+    <option value = "SAV"> SAV (Savannah, GA)</option>
+    <option value = "SVA"> SVA (Savoonga, AK)</option>
+    <option value = "SCM"> SCM (Scammon Bay, AK)</option>
+    <option value = "BFF"> BFF (Scottsbluff, NE)</option>
+    <option value = "SDL"> SDL (Scottsdale, AZ)</option>
+    <option value = "AVP"> AVP (Scranton, PA)</option>
+    <option value = "LKE"> LKE (Seattle, WA - Lake Union SPB)</option>
+    <option value = "SEA"> SEA (Seattle, WA - Seattle/Tacoma International)</option>
+    <option value = "WLK"> WLK (Selawik, AK)</option>
+    <option value = "SWD"> SWD (Seward, AK)</option>
+    <option value = "SHX"> SHX (Shageluk, AK)</option>
+    <option value = "SKK"> SKK (Shaktoolik, AK)</option>
+    <option value = "MSL"> MSL (Sheffield/Florence/Muscle Shoals, AL)</option>
+    <option value = "SXP"> SXP (Sheldon Point, AK)</option>
+    <option value = "SHR"> SHR (Sheridan, WY)</option>
+    <option value = "SHH"> SHH (Shishmaref, AK)</option>
+    <option value = "SHV"> SHV (Shreveport, LA)</option>
+    <option value = "SHG"> SHG (Shungnak, AK)</option>
+    <option value = "SVC"> SVC (Silver City, NM)</option>
+    <option value = "SUX"> SUX (Sioux City, IA)</option>
+    <option value = "FSD"> FSD (Sioux Falls, SD)</option>
+    <option value = "SIT"> SIT (Sitka, AK)</option>
+    <option value = "SGY"> SGY (Skagway, AK)</option>
+    <option value = "SLQ"> SLQ (Sleetmore, AK)</option>
+    <option value = "SBN"> SBN (South Bend, IN)</option>
+    <option value = "WSN"> WSN (South Naknek, AK)</option>
+    <option value = "SOP"> SOP (Southern Pines, NC)</option>
+    <option value = "GSP"> GSP (Spartanburg/Greenville, SC)</option>
+    <option value = "GEG"> GEG (Spokane, WA)</option>
+    <option value = "SPI"> SPI (Springfield, IL)</option>
+    <option value = "SGF"> SGF (Springfield, MO)</option>
+    <option value = "PIE"> PIE (St Petersburg/Clearwater, FL)</option>
+    <option value = "SCE"> SCE (State College/University Park, PA)</option>
+    <option value = "SHD"> SHD (Staunton, VA)</option>
+    <option value = "SBS"> SBS (Steamboat Springs, CO)</option>
+    <option value = "WBB"> WBB (Stebbins, AK)</option>
+    <option value = "CWA"> CWA (Stevens Point/Wausau, WI)</option>
+    <option value = "SVS"> SVS (Stevens Village, AK)</option>
+    <option value = "SWF"> SWF (Stewart Field/Newburgh, NY)</option>
+    <option value = "SCK"> SCK (Stockton, CA)</option>
+    <option value = "SRV"> SRV (Stony River, AK)</option>
+    <option value = "SUN"> SUN (Sun Valley, ID)</option>
+    <option value = "SYR"> SYR (Syracuse, NY)</option>
+    <option value = "TCT"> TCT (Takotna, AK)</option>
+    <option value = "TKA"> TKA (Talkeetna, AK)</option>
+    <option value = "TLH"> TLH (Tallahassee, FL)</option>
+    <option value = "TPA"> TPA (Tampa, FL)</option>
+    <option value = "TAL"> TAL (Tanana, AK)</option>
+    <option value = "TSM"> TSM (Taos, NM)</option>
+    <option value = "TEK"> TEK (Tatitlek, AK)</option>
+    <option value = "KTS"> KTS (Teller Mission, AK)</option>
+    <option value = "TEX"> TEX (Telluride, CO)</option>
+    <option value = "TKE"> TKE (Tenakee Springs, AK)</option>
+    <option value = "HUF"> HUF (Terre Haute, IN)</option>
+    <option value = "TEH"> TEH (Tetlin, AK)</option>
+    <option value = "TXK"> TXK (Texarkana, AR)</option>
+    <option value = "TVF"> TVF (Thief River Falls, MN)</option>
+    <option value = "KTB"> KTB (Thorne Bay, AK)</option>
+    <option value = "TNC"> TNC (Tin City, AK)</option>
+    <option value = "TOG"> TOG (Togiak Village, AK)</option>
+    <option value = "TKJ"> TKJ (Tok, AK)</option>
+    <option value = "OOK"> OOK (Toksook Bay, AK)</option>
+    <option value = "TOL"> TOL (Toledo, OH)</option>
+    <option value = "FOE"> FOE (Topeka, KS)</option>
+    <option value = "TVC"> TVC (Traverse City, MI)</option>
+    <option value = "TTN"> TTN (Trenton/Mercer, NJ)</option>
+    <option value = "TUS"> TUS (Tucson, AZ)</option>
+    <option value = "TUL"> TUL (Tulsa, OK)</option>
+    <option value = "TLT"> TLT (Tuluksak, AK)</option>
+    <option value = "WTL"> WTL (Tuntutuliak, AK)</option>
+    <option value = "TNK"> TNK (Tununak, AK)</option>
+    <option value = "TUP"> TUP (Tupelo, MS)</option>
+    <option value = "TCL"> TCL (Tuscaloosa, AL)</option>
+    <option value = "TWF"> TWF (Twin Falls, ID)</option>
+    <option value = "TWA"> TWA (Twin Hills, AK)</option>
+    <option value = "TYR"> TYR (Tyler, TX)</option>
+    <option value = "UNK"> UNK (Unalakleet, AK)</option>
+    <option value = "CMI"> CMI (Urbana/Champaign, IL)</option>
+    <option value = "UCA"> UCA (Utica, NY)</option>
+    <option value = "UTO"> UTO (Utopia Creek, AK)</option>
+    <option value = "EGE"> EGE (Vail, CO - Eagle County Airport)</option>
+    <option value = "QBF"> QBF (Vail, CO - Van service)</option>
+    <option value = "VDZ"> VDZ (Valdez, AK)</option>
+    <option value = "VLD"> VLD (Valdosta, GA)</option>
+    <option value = "VPS"> VPS (Valparaiso, FL)</option>
+    <option value = "VEE"> VEE (Venetie, AK)</option>
+    <option value = "OXR"> OXR (Ventura/Oxnard, CA)</option>
+    <option value = "VEL"> VEL (Vernal, UT)</option>
+    <option value = "VCT"> VCT (Victoria, TX)</option>
+    <option value = "VIS"> VIS (Visalia, CA)</option>
+    <option value = "ACT"> ACT (Waco, TX)</option>
+    <option value = "AIN"> AIN (Wainwright, AK)</option>
+    <option value = "WAA"> WAA (Wales, AK)</option>
+    <option value = "ALW"> ALW (Walla Walla, WA)</option>
+    <option value = "IAD"> IAD (Washington DC - Dulles)</option>
+    <option value = "DCA"> DCA (Washington DC - National)</option>
+    <option value = "KWF"> KWF (Waterfall, AK)</option>
+    <option value = "ALO"> ALO (Waterloo, IA)</option>
+    <option value = "ART"> ART (Watertown, NY)</option>
+    <option value = "ATY"> ATY (Watertown, SD)</option>
+    <option value = "CWA"> CWA (Wausau/Stevens Point, WI)</option>
+    <option value = "EAT"> EAT (Wenatchee, WA)</option>
+    <option value = "PBI"> PBI (West Palm Beach, FL)</option>
+    <option value = "WYS"> WYS (West Yellowstone, MT)</option>
+    <option value = "HPN"> HPN (Westchester County, NY)</option>
+    <option value = "WST"> WST (Westerly, RI)</option>
+    <option value = "WSX"> WSX (Westsound, WA)</option>
+    <option value = "WWP"> WWP (Whale Pass, AK)</option>
+    <option value = "WMO"> WMO (White Mountain, AK)</option>
+    <option value = "LEB"> LEB (White River, VT)</option>
+    <option value = "SPS"> SPS (Wichita Falls, TX)</option>
+    <option value = "ICT"> ICT (Wichita, KS)</option>
+    <option value = "AVP"> AVP (Wilkes Barre, PA)</option>
+    <option value = "PHF"> PHF (Williamsburg, VA)</option>
+    <option value = "IPT"> IPT (Williamsport, PA)</option>
+    <option value = "ISN"> ISN (Williston, ND)</option>
+    <option value = "ILM"> ILM (Wilmington, NC)</option>
+    <option value = "BDL"> BDL (Windsor Locks, CT)</option>
+    <option value = "ORH"> ORH (Worcester, MA)</option>
+    <option value = "WRL"> WRL (Worland, WY)</option>
+    <option value = "WRG"> WRG (Wrangell, AK)</option>
+    <option value = "YKM"> YKM (Yakima, WA)</option>
+    <option value = "YAK"> YAK (Yakutat, AK)</option>
+    <option value = "COD"> COD (Yellowstone/Cody, WY)</option>
+    <option value = "YNG"> YNG (Youngstown, OH)</option>
+    <option value = "YUM"> YUM (Yuma, AZ)</option>
+	</select>
+</div>
+
+
+
+<div data-role="drawer" id="right-drawer" style="width: 80px" data-title="Share" data-position="right" data-views="['two-drawer-home', '@Url.Content("~/mobile/m/drawer/two-way-drawers.html")']">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <img src="../../content/mobile/shared/share.png" width="100%"/>
+</div>
+
+<script>
+    // reset global drawer instance, for demo purposes
+    kendo.mobile.ui.Drawer.current = null;
+</script>
+
+<style>
+    .km-ios #left-drawer .km-content, .km-android #left-drawer .km-content, .km-blackberry #left-drawer .km-content,
+    .km-ios #left-drawer .km-list > li, .km-android #left-drawer .km-list > li, .km-blackberry #left-drawer .km-list > li,
+    .km-ios #left-drawer .km-listview-link > .km-icon, .km-android #left-drawer .km-listview-link > .km-icon, .km-blackberry #left-drawer .km-listview-link > .km-icon,
+    .km-ios #left-drawer .km-list li > .km-icon, .km-android #left-drawer .km-list li > .km-icon, .km-blackberry #left-drawer .km-list li > .km-icon,
+    #right-drawer .km-content
+    {
+        background-color: #4e4e4e;
+        color: #fff;
+    }
+
+    .km-ios #left-drawer .km-group-title,
+    .km-blackberry #left-drawer .km-group-title
+    {
+        background-color: #6e6e6e;
+        color: #fff;
+    }
+
+    #left-drawer .km-navbar, #right-drawer .km-navbar,
+    .km-tablet .km-ios #left-drawer .km-view-title,
+    .km-tablet .km-ios #right-drawer .km-view-title
+    {
+	background-color: #2e2e2e;
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+
+    .km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
+    .km-contacts:before, .km-contacts:after { content: "\E0E4"; }
+    .km-camera:before, .km-camera:after { content: "\E0D0"; }
+    .km-printer:before, .km-printer:after { content: "\E07E"; }
+    .km-comments:before, .km-comments:after { content: "\E093"; }
+    .km-graph:before, .km-graph:after { content: "\E04B"; }
+
+
+    #two-drawer-home h2
+    {
+        display: inline-block;
+        font-size: 1em;
+        line-height: 3em;
+        margin: 0 0 0 1em;
+    }
+
+    #two-drawer-home img
+    {
+        float: left;
+        width: 3em;
+        height: 3em;
+        margin: 0;
+        border: 2px solid rgba(0,0,0,.1);
+    }
+
+    .km-ios #two-drawer-home .km-listview
+    {
+        background-color: #eaf1f5;
+    }
+</style>
+
+
+    <script>
+        window.kendoMobileApplication = new kendo.mobile.Application(document.body);
+    </script>
+</body>
+</html>
