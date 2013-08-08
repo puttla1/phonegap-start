@@ -1,4 +1,4 @@
-var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/docs/test.json&callback=?", function(data)
+var a = $.getJSON("http://anyorigin.com/get?url=http://notamdemo.aim.nas.faa.gov/notamWFSTest/json?Designator=IAD&callback=?", function(data)
     {
       var max = data.contents.NOTAMs.Airports.IAD.length;
       var i;
