@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>View Notams</title>
+  <title>View NOTAMs</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,7 +12,8 @@
   <script src="js/custom-script.js"></script>
   <script src="js/jquery.mobile-1.3.2.min.js"></script>
   <script src="http://puneeth.org/javascripts/fnsapp.js"> </script>
-  <script src=js/searchbar.js></script>
+  <script src="js/searchbar.js"></script>
+  <script src="js/maps.js"></script>
   <script>
       $(function() {
     $("select").change(function() {
@@ -20,9 +21,12 @@
          var a = $.getJSON("http://anyorigin.com/get?url=http://puneeth.org/notamWFS/" + code + ".json&callback=?", function(data)
         {
          eval("var max = data.contents.NOTAMs.Airports." + code + ".length;");
+         if(max == 0) alert("No NOTAMs found for " + code);
          var i;
           eval("$(\"#headtop\").empty().append(\"" + code + " NOTAMS: \" + data.contents.NOTAMs.Airports." + code + ".length);");
           eval("$(\"#num\").empty().append(\"Number of NOTAMs: \" + data.contents.NOTAMs.Airports." + code + ".length);");
+          eval("$(\"#mapimg\").attr(\"src\",\"http://maps.googleapis.com/maps/api/staticmap?center=\" +  data.contents.NOTAMs.Airports." + code + "[0].Latitude + \",\" + data.contents.NOTAMs.Airports." + code + "[0].Longitude + \"&zoom=13&size=150x150&sensor=false\")");
+          
 
           $("#col1").empty();
           for(i = 0; i < max; i++)
@@ -61,10 +65,17 @@
     <script type="text/javascript" src="index.js"></script>
     </ul>
        <ul>
+  <script>
+    $(function()  {
+      $(".card").dblclick(function()  {
+        alert("hello");
+      });
+    });
+  </script>
     </div><!-- /content -->
     <div data-role="panel" id="left-panel" data-theme="b">
       <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a>
-        <h2>Search Notams</h2>
+        <h2>Search NOTAMs</h2>
 	<form action="submit"><input type="text" name="query" placeholder="Search Query"><input type="submit" value="Search"> </form>
 	</br>
 	</br>
@@ -78,8 +89,9 @@
 <!--        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a> -->
     </div><!-- /panel -->
     <div data-role="panel" id="right-panel" data-display="reveal" data-position="right" data-theme="b">
-	<h2>Notams Info</h2>
+	<h2>NOTAMs Info</h2>
 	<p  style="text-align:center;" id="num">Number of NOTAMs: </p>
+  <img style="margin-left:auto;margin-right:auto;display:block;" id="mapimg" src="">
   <form>
     <input id="airinput">
   </form>
@@ -123,7 +135,7 @@
     <option value = "AHN"> AHN (Athens, GA)</option>
     <option value = "AKB"> AKB (Atka, AK)</option>
     <option value = "ATL"> ATL (Atlanta, GA)</option>
-    <option value = "AIY"> AIY (Atlantic City, NJ)</option>
+    <option value = "ACY"> ACY (Atlantic City, NJ)</option>
     <option value = "ATK"> ATK (Atqasuk, AK)</option>
     <option value = "AGS"> AGS (Augusta, GA)</option>
     <option value = "AUG"> AUG (Augusta, ME)</option>
