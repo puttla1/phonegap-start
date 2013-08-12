@@ -28,9 +28,58 @@ function findUrl(code, geometry)
   else return "";
 
 }
-function makePoly(geo, id)
+function initPoly(arr, id, lat, longi)
 {
-  return;
+    var myLatLng = new google.maps.LatLng(lat, longi);
+    var mapOptions = 
+    {
+      zoom: 12,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+  var airmap;
+
+  var map = new google.maps.Map(document.getElementById(id), mapOptions);
+
+  var len = arr.length;
+
+ var polyCoords = new Array(); 
+
+  var i;
+  
+  for(i = 0; i < len; i++)
+  {
+    var temparr = arr[i].split(" ");
+    polyCoords[i] = new google.maps.LatLng(temparr[1], temparr[0]);
+  }
+
+  // Construct the polygon
+  airmap = new google.maps.Polygon({
+    paths: polyCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+
+  airmap.setMap(map);
+
+  google.maps.event.addListenerOnce(map, 'idle', function() 
+  {
+    var div = document.getElementById(id); 
+    div.style.display = "none"; 
+    div.style.position = "relative"; 
+    div.style.left = "0px"; 
+  });  
+}
+function makePoly(geo, id, lat, longi)
+{
+  var arr = geo.split(",");
+
+
+  initPoly(arr, id, lat, longi);
 }
 function initPoint(coor, id)
 {
@@ -55,7 +104,7 @@ function makePoint(geo, id)
     initPoint(coords, id);
 
 }
-function makeShape(geometry, id)
+function makeShape(geometry, id, lat, longi)
 {
   if(geometry == "null") return;
 
@@ -67,7 +116,7 @@ function makeShape(geometry, id)
   }
   if(arr[0] == "POLYGON")
   {
-    makePoly(arr[2].substring(0,arr[2].length-2), id);
+    makePoly(arr[2].substring(1,arr[2].length-2), id, lat, longi);
   }
 }
 var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/IAD.json&callback=?", function(data)
@@ -78,12 +127,14 @@ var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/IAD.json&ca
 	$("#num").append(data.contents.NOTAMs.Airports.IAD.length);
     var code = "IAD";
     eval("$(\"#mapimg\").attr(\"src\",\"http://maps.googleapis.com/maps/api/staticmap?center=\" +  data.contents.NOTAMs.Airports." + code + "[0].Latitude + \",\" + data.contents.NOTAMs.Airports." + code + "[0].Longitude + \"&zoom=11&size=150x150&sensor=false\")");
+    eval("var lat  = data.contents.NOTAMs.Airports." + code + "[0].Latitude");
+    eval("var longi = data.contents.NOTAMs.Airports." + code + "[0].Longitude");
 
       for(i = 0; i < max; i++)
       {
         //$("#col1").append('<li><div onclick=\"$(\'#img' + (i+1) + '\').toggle();$(\'#title'+ (i+1) + '\').toggle();$(\'#content'+(i+1)  + '\').toggle();\" class =\"card\"><p class =\"card-title\" id=\"title' + (i+1) + '\" >IAD-' + data.contents.NOTAMs.Airports.IAD[i].NOTAMNumber + "</p><p id=\"content" + (i+1) + "\">" + data.contents.NOTAMs.Airports.IAD[i].Domestic + "</p> <img style=\"display:none; margin-left:auto; margin-right:auto;\" id=\"img" + (i+1) + "\" src=\""+imgurl+ "\"> </div></li>");
         $("#col1").append('<li><div onclick=\"$(\'#img' + (i+1) + '\').toggle();$(\'#title'+ (i+1) + '\').toggle();$(\'#content'+(i+1)  + '\').toggle();\" class =\"card\"><p class =\"card-title\" id=\"title' + (i+1) + '\" >IAD-' + data.contents.NOTAMs.Airports.IAD[i].NOTAMNumber + "</p><p id=\"content" + (i+1) + "\">" + data.contents.NOTAMs.Airports.IAD[i].Domestic + "</p> <div id=\"img" + (i+1) + "\" style=\"display:block;position:absolute;left:-1000px;width:400px; height:400px;\"> </div></li>");
-        makeShape(data.contents.NOTAMs.Airports.IAD[i].Geometry, "img" + (i+1));
+        makeShape(data.contents.NOTAMs.Airports.IAD[i].Geometry, "img" + (i+1), lat, longi);
       }
 
     });
