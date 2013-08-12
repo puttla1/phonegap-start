@@ -9,6 +9,19 @@ function getPointUrl(geo)
   return "http://maps.googleapis.com/maps/api/staticmap?center=" + coords[1] + "," + coords[0] +"&zoom=12&size=200x200&sensor=false";
 
 }
+
+google.maps.Polygon.prototype.getBounds = function() {
+    var bounds = new google.maps.LatLngBounds();
+    var paths = this.getPaths();
+    var path;        
+    for (var i = 0; i < paths.getLength(); i++) {
+        path = paths.getAt(i);
+        for (var ii = 0; ii < path.getLength(); ii++) {
+            bounds.extend(path.getAt(ii));
+        }
+    }
+    return bounds;
+}
 function findUrl(code, geometry)
 {
   if(geometry == "null") return "";
@@ -51,6 +64,7 @@ function initPoly(arr, id, lat, longi)
   for(i = 0; i < len; i++)
   {
     var temparr = arr[i].split(" ");
+    console.log(temparr[i] + " " + temparr[0]);
     polyCoords[i] = new google.maps.LatLng(temparr[1], temparr[0]);
   }
 
@@ -63,6 +77,8 @@ function initPoly(arr, id, lat, longi)
     fillColor: '#FF0000',
     fillOpacity: 0.35
   });
+
+  map.fitBounds(airmap.getBounds());
 
   airmap.setMap(map);
 
@@ -114,9 +130,9 @@ function makeShape(geometry, id, lat, longi)
   {
     makePoint(arr[1].substring(0,arr[1].length-1), id);
   }
-  if(arr[0] == "POLYGON")
+  else if(arr[0] == "POLYGON")
   {
-    makePoly(arr[2].substring(1,arr[2].length-2), id, lat, longi);
+    makePoly(arr[2].substring(0,arr[2].length-2), id, lat, longi);
   }
 }
 var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/IAD.json&callback=?", function(data)
