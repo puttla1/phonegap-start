@@ -4,7 +4,6 @@ function getPolygonUrl(geo)
 }
 function getPointUrl(geo)
 {
-  alert("used this");
   var coords = geo.split(" ");
   return "http://maps.googleapis.com/maps/api/staticmap?center=" + coords[1] + "," + coords[0] +"&zoom=12&size=200x200&sensor=false";
 
