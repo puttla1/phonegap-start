@@ -1,14 +1,13 @@
 function getPolygonUrl(geo, lat, longi)
 {
   var coords = geo.split(",");
-  var s = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "" + longi + "&zoom=12&size=400x400&maptype=roadmap&sensor=false&path=color:red|weight:1|fillcolor:white";
+  var s = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "" + longi + "&zoom=12&size=400x400&maptype=roadmap&sensor=false&path=color:red|weight:5|fillcolor:white";
   var i;
   for(i =0; i < coords.length; i++)
   {
-    var fur = coords[0].split(" ");
+    var fur = coords[i].split(" ");
     s += ("|" + fur[1] + "," + fur[0]);
   }
-  alert(s);
   return s;
 }
 function getPointUrl(geo)
@@ -161,7 +160,7 @@ var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/IAD.json&ca
 
       for(i = 0; i < max; i++)
       {
-        imgurl = findUrl(code, data.contents.NOTAMs.Airports.IAD[i].Geometry, lat, longi);
+        var imgurl = findUrl(code, data.contents.NOTAMs.Airports.IAD[i].Geometry, lat, longi);
         $("#col1").append('<li><div onclick=\"$(\'#img' + (i+1) + '\').toggle();$(\'#title'+ (i+1) + '\').toggle();$(\'#content'+(i+1)  + '\').toggle();\" class =\"card\"><p class =\"card-title\" id=\"title' + (i+1) + '\" >IAD-' + data.contents.NOTAMs.Airports.IAD[i].NOTAMNumber + "</p><p id=\"content" + (i+1) + "\">" + data.contents.NOTAMs.Airports.IAD[i].Domestic + "</p> <img style=\"display:none; margin-left:auto; margin-right:auto;\" id=\"img" + (i+1) + "\" src=\""+imgurl+ "\"> </div></li>");
         //$("#col1").append('<li><div onclick=\"$(\'#img' + (i+1) + '\').toggle();$(\'#title'+ (i+1) + '\').toggle();$(\'#content'+(i+1)  + '\').toggle();\" class =\"card\"><p class =\"card-title\" id=\"title' + (i+1) + '\" >IAD-' + data.contents.NOTAMs.Airports.IAD[i].NOTAMNumber + "</p><p id=\"content" + (i+1) + "\">" + data.contents.NOTAMs.Airports.IAD[i].Domestic + "</p> <div id=\"img" + (i+1) + "\" style=\"display:block;position:absolute;left:-1000px;width:25%; height:7em;\"> </div></li>");
         //makeShape(data.contents.NOTAMs.Airports.IAD[i].Geometry, "img" + (i+1), lat, longi);

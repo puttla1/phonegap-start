@@ -27,11 +27,13 @@
           eval("$(\"#headtop\").empty().append(\"" + code + " NOTAMS: \" + data.contents.NOTAMs.Airports." + code + ".length);");
           eval("$(\"#num\").empty().append(\"Number of NOTAMs: \" + data.contents.NOTAMs.Airports." + code + ".length);");
           eval("$(\"#mapimg\").attr(\"src\",\"http://maps.googleapis.com/maps/api/staticmap?center=\" +  data.contents.NOTAMs.Airports." + code + "[0].Latitude + \",\" + data.contents.NOTAMs.Airports." + code + "[0].Longitude + \"&zoom=13&size=150x150&sensor=false\")");          
+          eval("var lat  = data.contents.NOTAMs.Airports." + code + "[0].Latitude");
+          eval("var longi = data.contents.NOTAMs.Airports." + code + "[0].Longitude");
 
           $("#col1").empty();
           for(i = 0; i < max; i++)
           {
-            eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry)");
+            eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
             eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (i+1) + '\\\').toggle();$(\\\'#title' + (i+1) + '\\\').toggle();$(\\\'#content' + (i+1) + '\\\').toggle()\" class =\\\"card\\\"><p id=\\\"title' + (i+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (i+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\"display:none; margin-left:auto; margin-right: auto;\\\" id=\\\"img" + (i+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
           }
 
