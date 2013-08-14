@@ -71,7 +71,7 @@
        <ul>
     </div><!-- /content -->
     <div data-role="panel" id="left-panel" data-theme="b">
-      <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a>
+      <div class="panbut"> <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a> </div>
         <h2>Search NOTAMs</h2>
 	<form action="submit"><input type="text" name="query" placeholder="Search Query"><input type="submit" value="Search"> </form>
 	</br>
@@ -89,10 +89,10 @@
 	<h2>NOTAMs Info</h2>
 	<p  style="text-align:center;" id="num">Number of NOTAMs: </p>
   <img style="margin-left:auto;margin-right:auto;display:block;" id="mapimg" src="">
+  <br/>
   <form>
     <input placeholder="Search airports" id="airinput">
   </form>
-  <br>
 	<select id="optlist" name="airport" form="airportsubmit" class="selectsearch" style="width=100%;">
     <option value = "" > Airport </option>
     <option value = "ABR"> ABR (Aberdeen, SD)</option>
