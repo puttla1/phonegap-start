@@ -47,7 +47,7 @@ ul.gNow li {
 }
 div.card {
   background: #ffffff;
-  width: 100%;
+  width: auto;
   position: relative;
   padding: 15px;
   box-shadow: 0px 3px rgba( 0, 0, 0, 0.1 );
@@ -58,7 +58,6 @@ div.card {
   -webkit-border-radius: 2px;
   border: 1px solid #BBBBBB;
   border-radius: 2px;
-  margin-right:2%;
   }
   div.card p {
     margin: 0 0 15px 0;
