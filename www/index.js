@@ -164,10 +164,18 @@ function makeShape(geometry, id, lat, longi)
 }
 
 var code;
-if (typeof window.localStorage.getItem('airportcode')!== 'undefined' &&  window.localStorage.getItem('airportcode')!=null) {
+
+if (typeof window.localStorage.getItem('searchaircode')!== 'undefined' &&  window.localStorage.getItem('searchaircode') != null) {
+  code = window.localStorage.getItem('searchaircode');
+    window.localStorage.removeItem('searchaircode');
+}
+else if (typeof window.localStorage.getItem('airportcode')!== 'undefined' &&  window.localStorage.getItem('airportcode')!=null) {
     code =  window.localStorage.getItem('airportcode');
      }
-else code = "IAD";
+else{
+alert("No preferred airport code has been set. Please set up a preferred code in Settings -> Set preferred airport. Until then IAD will be the default airport");
+code = "IAD";
+}
 
 var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/" + code + ".json&callback=?", function(data)
     {
