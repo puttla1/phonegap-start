@@ -11,7 +11,7 @@ public class makehtml
 		BufferedReader b = new BufferedReader(new FileReader("designators.txt"));
 
     ArrayList<String> list = new ArrayList<String>();
-    for(int i = 0; i < 812; i++)
+    for(int i = 0; i < 5245; i++)
       list.add(b.readLine());
     b.close();
     int count = 0;
@@ -25,8 +25,8 @@ public class makehtml
       id = id.substring(0, id.length() - 1);
       if(list.contains(id))
       {
-        count ++;
-       System.out.println("<li><a id=\"" + id + "\" onclick=\"storeID(this)\" rel=\"external\" href=\"index.html\">" + s + "</a></li>");
+        count++;
+        System.out.println(id);
       }
 		}
 	}
