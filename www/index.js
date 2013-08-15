@@ -1,7 +1,7 @@
 function getPolygonUrl(geo, lat, longi)
 {
   var coords = geo.split(",");
-  var width = document.getElementById("card1").clientWidth * .7;
+  var width = document.getElementById("card1").clientWidth * .8;
   width = Math.round(width);
   var height = document.getElementById("card1").clientHeight * 2;
   height = Math.round(height);
