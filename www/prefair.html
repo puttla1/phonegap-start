@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <title>jQuery Mobile Docs - Filtered Lists</title> 
   <link rel="stylesheet"  href="css/jquery.mobile-1.3.2.min.css" />  
-
+  <link rel="stylesheet"  href="css/jqm-f-theme.css" />  
   <script src="js/jquery-1.9.1.min.js"></script>
 <!--  <script src="js/jqm-docs.js"></script>  -->
   <script src="js/jquery.mobile-1.3.2.min.js"></script>
+  <script src="js/color.js"></script>
   <script>
     function storeID(e)  {
       var id = e.id;
@@ -23,8 +24,8 @@
 
   <div data-role="page" class="type-interior">
 
-  <div data-role="header" data-position="fixed" data-theme="b">
-    <a href="index.html" data-icon="home" rel="external" data-iconpos="notext">Home</a>
+  <div id="header" data-role="header" data-position="fixed">
+    <a id="butto" href="settings.html" rel="external">Back</a>
     <h1>Set preferred airport</h1>
   </div><!-- /header -->
 
