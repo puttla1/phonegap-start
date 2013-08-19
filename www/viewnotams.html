@@ -53,7 +53,7 @@
 		text-align: center;
 	}
 	.ui-btn	{
-		width: 40%;
+		width: 50%;
 		height: 75%;
 		margin-left: auto;
 		margin-right: auto;
@@ -79,7 +79,6 @@
     </div><!-- /content -->
     <div data-role="panel" id="left-panel" data-theme="b">
       <div class="panbut"> <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a> 
-      <div class="panbut"> <a href="settings.html" data-role="button" rel="external" data-icon="home">Setti</a> 
     </div>
   
   <!--
@@ -93,17 +92,14 @@
 		<input type="text" id="notname" placeholder="Notam #">
 		<input type="text" id="cond" placeholder="Condition">
 		<input type="text" id="cl" placeholder="Class">
-    <div class="joj" style="display: inline;">
       <button class="kok1" onclick=filter(); value="Filter"></button>
-      <button class="kok1" onclick="location.href='viewnotams.html';" value="Unfilter"></button>
-    </div>
     
     <!--	</form> -->
 <!--        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a> -->
-    </div><!-- /panel -->
-    <div data-role="panel" id="right-panel" data-display="reveal" data-position="right" data-theme="b">
+  </div><!-- /panel -->
+  <div data-role="panel" id="right-panel" data-display="reveal" data-position="right" data-theme="b">
 	<h2>NOTAMs Info</h2>
-	<p  style="text-align:center;" id="num">Number of NOTAMs: </p>
+	<p style="text-align:center;" id="num">Number of NOTAMs: </p>
   <img style="margin-left:auto;margin-right:auto;display:block;" id="mapimg" src="">
   <br/>
   <form>

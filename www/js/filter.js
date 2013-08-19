@@ -48,6 +48,7 @@ function filter()
 
         else if((cond != null && cond != "") && (cl == null || cl == ""))
         {
+            
             alert("There is a condition but no class!");
         }
 
