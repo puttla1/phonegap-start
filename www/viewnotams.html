@@ -53,12 +53,15 @@
 		text-align: center;
 	}
 	.ui-btn	{
-		width: 50%;
+		width: 40%;
 		height: 75%;
 		margin-left: auto;
 		margin-right: auto;
 		text-size: 75%;
 	}
+  .kok1 {
+    display: inline-block;
+  }
   </style>
 </head>
 <body>
@@ -75,7 +78,9 @@
        <ul>
     </div><!-- /content -->
     <div data-role="panel" id="left-panel" data-theme="b">
-      <div class="panbut"> <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a> </div>
+      <div class="panbut"> <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a> 
+      <div class="panbut"> <a href="settings.html" data-role="button" rel="external" data-icon="home">Setti</a> 
+    </div>
   
   <!--
   <h2>Search NOTAMs</h2>
@@ -88,7 +93,11 @@
 		<input type="text" id="notname" placeholder="Notam #">
 		<input type="text" id="cond" placeholder="Condition">
 		<input type="text" id="cl" placeholder="Class">
-    <div onclick=filter();>   <button value="Filter"></button> </div>
+    <div class="joj" style="display: inline;">
+      <button class="kok1" onclick=filter(); value="Filter"></button>
+      <button class="kok1" onclick="location.href='viewnotams.html';" value="Unfilter"></button>
+    </div>
+    
     <!--	</form> -->
 <!--        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a> -->
     </div><!-- /panel -->

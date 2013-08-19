@@ -21,14 +21,49 @@ function filter()
         eval("var notnam = data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber");
         var notnam = notnam.substring(0, 3) + notnam.substring(3);
         var altname = code + "-" + notnam;
-        if(name != null && name != "" && (notnam == name || altname == name))
+        if(name != null && name != "")
         {
-          eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
-          eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (i+1) + '\\\').toggle();$(\\\'#title' + (i+1) + '\\\').toggle();$(\\\'#content' + (i+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (i+1) + '\\\"><p id=\\\"title' + (i+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (i+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (i+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
-          eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (i+1));");
-          eval("$(\"#headtop\").empty().append(\"" + code + " NOTAMS: 1");
-          return false;
+          if(notnam == name || altname == name)
+          {
+            eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
+            eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (i+1) + '\\\').toggle();$(\\\'#title' + (i+1) + '\\\').toggle();$(\\\'#content' + (i+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (i+1) + '\\\"><p id=\\\"title' + (i+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (i+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (i+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
+            eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (i+1));");
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 1\")");
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl") = '';
+            return;
+          }
+          else if(i == max - 1)
+          {
+            alert("No NOTAMs with that NOTAM Number exist!");
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 0\")");
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl") = '';
+            return;
+          }
+          else continue;
         }
+
+        else if((cond != null && cond != "") && (cl == null || cl == ""))
+        {
+            alert("There is a condition but no class!");
+        }
+
+        else if((cond == null || cond == "") && (cl != null && cl != ""))
+        {
+            alert("There is a class but no condition");
+        }
+
+        else if((cond != null && cond != "") && (cl != null && cl != ""))
+        {
+            alert("There is a class and a condition");
+        }
+
+        else alert("error");
+
+
       }
 
     });
