@@ -17,10 +17,12 @@
   <script src="js/searchbar.js"></script>
   <script src="js/maps.js"></script>
   <script src="js/color.js"></script>
+  <script src="js/filter.js"></script>
   <script>
       $(function() {
     $("select").change(function() {
       var code  = $(this).val();
+      window.localStorage.setItem('tempair', code);
          var a = $.getJSON("http://anyorigin.com/get?url=http://puneeth.org/notamWFS/" + code + ".json&callback=?", function(data)
         {
          eval("var max = data.contents.NOTAMs.Airports." + code + ".length;");
@@ -82,12 +84,12 @@
   -->
 	</br>
 	<h2>Find/Filter</h1>
-	<form action='submit'>
-		<input type="text" name="query" placeholder="Notam #">
-		<input type="text" name="query" placeholder="Condition">
-		<input type="text" name="class" placeholder="Class">
-		<input type = "submit" value="Filter">
-	</form>
+  <!-- 	<form name="fil" onsubmit="return false;"> -->
+		<input type="text" id="notname" placeholder="Notam #">
+		<input type="text" id="cond" placeholder="Condition">
+		<input type="text" id="cl" placeholder="Class">
+    <div onclick=filter();>   <button value="Filter"></button> </div>
+    <!--	</form> -->
 <!--        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a> -->
     </div><!-- /panel -->
     <div data-role="panel" id="right-panel" data-display="reveal" data-position="right" data-theme="b">

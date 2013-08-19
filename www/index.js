@@ -171,6 +171,7 @@ if (typeof window.localStorage.getItem('searchaircode')!== 'undefined' &&  windo
 }
 else if (typeof window.localStorage.getItem('airportcode')!== 'undefined' &&  window.localStorage.getItem('airportcode')!=null) {
     code =  window.localStorage.getItem('airportcode');
+
      }
 else{
 if(confirm("No preferred airport code has been set. Please set up a preferred code in Settings -> Set preferred airport. Until then IAD will be the default airport"))
@@ -178,6 +179,7 @@ if(confirm("No preferred airport code has been set. Please set up a preferred co
 code = "IAD";
 }
 
+window.localStorage.setItem('tempair', code);
 var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/" + code + ".json&callback=?", function(data)
     {
       eval("var max = data.contents.NOTAMs.Airports." + code + ".length;");
