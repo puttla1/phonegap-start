@@ -53,20 +53,24 @@
 		text-align: center;
 	}
 	.ui-btn	{
-		width: 50%;
-		height: 75%;
-		margin-left: auto;
-		margin-right: auto;
-		text-size: 75%;
+		//width: 50%;
+		//height: 75%;
+		//margin-left: auto;
+		//margin-right: auto;
+		//text-size: 75%;
 	}
   .kok1 {
     display: inline-block;
+  }
+  .ui-select  {
+    text-align:center;
   }
   </style>
 </head>
 <body>
 <div data-role="page" id="demo-page" data-theme="d">
     <div id="header" style="z-index:500;width:100%;background-color: #e5e5e5" data-role="header" data-tap-toggle="false" data-position="fixed" data-fullscreen="false"  >
+      <a data-role="button" data-icon="refresh" data-iconpos="notext" rel="external" href="viewnotams.html"></a>
 	<h1 id="headtop"> </h1>
         <!--<a href="#left-panel" data-theme="d" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
         <a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a> -->
@@ -78,8 +82,10 @@
        <ul>
     </div><!-- /content -->
     <div data-role="panel" id="left-panel" data-theme="b">
-      <div class="panbut"> <a href="index.html" data-role="button" rel="external" data-icon="home">Home</a> 
-    </div>
+      <div class="ui-grid-a"> 
+        <div class="ui-block-a"><a href="settings.html"  data-role="button" data-icon="gear"  rel="external" >Settings</a> </div>
+        <div class="ui-block-b"><a href="index.html"   data-role="button"  data-icon="home" rel="external" >Home</a> </div>
+      </div>
   
   <!--
   <h2>Search NOTAMs</h2>
@@ -92,8 +98,12 @@
 		<input type="text" id="notname" placeholder="Notam #">
 		<input type="text" id="cond" placeholder="Condition">
 		<input type="text" id="cl" placeholder="Class">
-    <button class="kok1" onclick=filter(); value="Filter"></button>
-    <button class="kok1" onclick="location.href='viewnotams.html'"; value="Unfilter"></button>
+    <div style="margin-left: auto; margin-right: auto;">
+    <fieldset class="ui-grid-a">
+      <div class="ui-block-a"><button  data-theme="b" onclick=filter(); value="Filter" ></button></div>
+      <div class="ui-block-b"><button  onclick="location.href='viewnotams.html'" value="Unfilter"></button></div>
+    </fieldset>
+  </div>
     
     <!--	</form> -->
 <!--        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a> -->
@@ -106,7 +116,7 @@
   <form>
     <input placeholder="Search airports" id="airinput">
   </form>
-	<select id="optlist" name="airport" form="airportsubmit" class="selectsearch" style="width=100%;">
+	<select id="optlist" data-inline="true" name="airport" form="airportsubmit" class="selectsearch" style="margin: 0 auto;text-align: true;">
     <option value = "" > Airport </option>
     <option value = "ABR"> ABR (Aberdeen, SD)</option>
     <option value = "ABI"> ABI (Abilene, TX)</option>
