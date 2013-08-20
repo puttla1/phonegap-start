@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width,user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       <!--  <link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="junk.css" /> -->
+        <title>Main Menu</title>
+        <script src="phonegap.js"></script>
+        <script src="/js/index.js"></script>
+
+	<style>
+  body, html  {
+    width: 100%;
+    height: 100%;
+  }
+	body
+	{
+	  text-align: center;
+	}
+	button
+	{
+	  border-top: 1px solid #96d1f8;
+	  background: #65a9d7;
+	  background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+
+	  padding: 5px 10px;
+	  -webkit-border-radius: 4px;
+	  -moz-border-radius: 4px;
+	  border-radius: 4px;
+	  -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	  -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	  box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	  text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+	  color: white;
+	  font-size: 70px;
+	  font-weight: bold;
+	  font-family: Segoe;
+	  text-decoration: none;
+	  vertical-align: middle;
+	  width: 45%;
+	  margin-bottom: 30px;
+	  margin-left:15px;
+	  margin-right:15px;
+	  height: 46%;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+	}
+
+  button#topbutt
+  {
+    margin-top: 30px;
+  }
+
+  button:hover
+  {
+    opacity: 0.6;
+  }
+
+	</style>
+    </head>
+    <body style="background: #e5e5e5;">
+	<button class="topbutt" type="button" onclick="window.location.href='viewnotams.html'"> View NOTAMs</button>
+	<button class="topbutt" type="button" onclick="window.location.href='searchnotams.html'"> Search NOTAMs</button>
+	</br>
+	<button type="button" onclick="window.location.href='settings.html'"> Settings </button>
+  <script>
+    app.initialize();
+  </script>
+    </body>
+</html>

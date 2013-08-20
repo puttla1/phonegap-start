@@ -65,6 +65,7 @@ function findUrl(code, geometry, lat, longi)
 
   else if(arr[0] == "POLYGON")
   {
+     if(arr[2].length > 2048) return "";
      return getPolygonUrl(arr[2].substring(0,arr[2].length-2), lat, longi);
   }
 
