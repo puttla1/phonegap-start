@@ -1,9 +1,17 @@
 function getPolygonUrl(geo, lat, longi)
 {
   var coords = geo.split(",");
-  var width = document.getElementById("card1").clientWidth * .8;
+  if(window.localStorage.getItem('bool') == "0")
+  {
+    var width = document.getElementById("card1").clientWidth * .8;
+    var height = document.getElementById("card1").clientHeight * 2;
+  }
+  else
+  {
+    var width = JSON.parse(window.localStorage.getItem('cardwidth'));
+    var height = JSON.parse(window.localStorage.getItem('cardheight'));
+  }
   width = Math.round(width);
-  var height = document.getElementById("card1").clientHeight * 2;
   height = Math.round(height);
   
   var s = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "" + longi + "&zoom=12&size=" + width + "x" + height + "&maptype=roadmap&sensor=false&path=color:red|weight:5|fillcolor:white";
@@ -190,6 +198,7 @@ var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/" + code + 
     eval("$(\"#mapimg\").attr(\"src\",\"http://maps.googleapis.com/maps/api/staticmap?center=\" +  data.contents.NOTAMs.Airports." + code + "[0].Latitude + \",\" + data.contents.NOTAMs.Airports." + code + "[0].Longitude + \"&zoom=11&size=150x150&sensor=false\")");
     eval("var lat  = data.contents.NOTAMs.Airports." + code + "[0].Latitude");
     eval("var longi = data.contents.NOTAMs.Airports." + code + "[0].Longitude");
+    window.localStorage.setItem('bool', "0");
 
       for(i = 0; i < max; i++)
       {
@@ -202,6 +211,9 @@ var a = $.getJSON("http://anyorigin.com/get?url=puneeth.org/notamWFS/" + code + 
         eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (i+1) + '\\\').toggle();$(\\\'#title' + (i+1) + '\\\').toggle();$(\\\'#content' + (i+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (i+1) + '\\\"><p id=\\\"title' + (i+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (i+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto; display: block;\\\" id=\\\"img" + (i+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
         eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (i+1));");
       }
+      window.localStorage.setItem('bool', "1");
+      window.localStorage.setItem('cardwidth', JSON.stringify(document.getElementById("card1").clientWidth * .8));
+      window.localStorage.setItem('cardheight', JSON.stringify(document.getElementById("card1").clientHeight * 2));
 
     });
 

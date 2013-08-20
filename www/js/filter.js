@@ -16,9 +16,14 @@ function filter()
       var cl = document.getElementById("cl").value;
 
       $("#col1").empty();
+      var onlycond = 0;
+      var onlycl = 0;
+      var condcl = 0; 
       for(i = 0; i < max; i++)
       {
         eval("var notnam = data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber");
+        eval("var notcond = data.contents.NOTAMs.Airports." + code + "[i].Condition");
+        eval("var notcl = data.contents.NOTAMs.Airports." + code + "[i].keyword");
         var notnam = notnam.substring(0, 3) + notnam.substring(3);
         var altname = code + "-" + notnam;
         if(name != null && name != "")
@@ -31,7 +36,7 @@ function filter()
             eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 1\")");
             document.getElementById("notname").value = '';
             document.getElementById("cond").value = '';
-            document.getElementById("cl") = '';
+            document.getElementById("cl").value = '';
             return;
           }
           else if(i == max - 1)
@@ -40,7 +45,7 @@ function filter()
             eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 0\")");
             document.getElementById("notname").value = '';
             document.getElementById("cond").value = '';
-            document.getElementById("cl") = '';
+            document.getElementById("cl").value = '';
             return;
           }
           else continue;
@@ -48,22 +53,102 @@ function filter()
 
         else if((cond != null && cond != "") && (cl == null || cl == ""))
         {
-            
-            alert("There is a condition but no class!");
+           if(notcond.indexOf(cond) >= 0)  
+           {
+            eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
+            eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (onlycond+1) + '\\\').toggle();$(\\\'#title' + (onlycond+1) + '\\\').toggle();$(\\\'#content' + (onlycond+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (onlycond+1) + '\\\"><p id=\\\"title' + (onlycond+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (onlycond+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (onlycond+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
+            eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (onlycond+1));");
+            onlycond++;
+           }
+
+
+           if(i == max - 1 && onlycond == 0)
+          {
+             alert("No NOTAMs with that condition exist!"); 
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 0\")");
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl").value = '';
+            return;
+          }
+          
+
+          if(i == max - 1 && onlycond > 0)
+          {
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: "+ onlycond + "\")"); 
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl").value = '';
+            return;
+          }
+
         }
 
         else if((cond == null || cond == "") && (cl != null && cl != ""))
         {
-            alert("There is a class but no condition");
+           if(notcl.toUpperCase() == cl.toUpperCase())  
+           {
+            eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
+            eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (onlycl+1) + '\\\').toggle();$(\\\'#title' + (onlycl+1) + '\\\').toggle();$(\\\'#content' + (onlycl+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (onlycl+1) + '\\\"><p id=\\\"title' + (onlycl+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (onlycl+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (onlycl+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
+            eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (onlycl+1));");
+            onlycl++;
+           }
+
+
+           if(i == max - 1 && onlycl == 0)
+          {
+             alert("No NOTAMs with that class exist!"); 
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 0\")");
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl").value = '';
+            return;
+          }
+          
+
+          if(i == max - 1 && onlycl > 0)
+          {
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: "+ onlycl + "\")"); 
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl").value = '';
+            return;
+          }
+
         }
 
         else if((cond != null && cond != "") && (cl != null && cl != ""))
         {
-            alert("There is a class and a condition");
+           if(notcond.indexOf(cond) >= 0 && notcl.toUpperCase() == cl.toUpperCase())  
+           {
+            eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
+            eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (condcl+1) + '\\\').toggle();$(\\\'#title' + (condcl+1) + '\\\').toggle();$(\\\'#content' + (condcl+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (condcl+1) + '\\\"><p id=\\\"title' + (condcl+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (condcl+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (condcl+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
+            eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (condcl+1));");
+            condcl++;
+           }
+
+
+           if(i == max - 1 && condcl == 0)
+          {
+             alert("No NOTAMs with that condition exist!"); 
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 0\")");
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl").value = '';
+            return;
+          }
+          
+
+          if(i == max - 1 && condcl > 0)
+          {
+            eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: "+ condcl + "\")"); 
+            document.getElementById("notname").value = '';
+            document.getElementById("cond").value = '';
+            document.getElementById("cl").value = '';
+            return;
+          }
+
         }
-
-        else alert("error");
-
 
       }
 
