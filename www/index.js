@@ -180,14 +180,11 @@ if (typeof window.localStorage.getItem('searchaircode')!== 'undefined' &&  windo
 }
 else if (typeof window.localStorage.getItem('airportcode')!== 'undefined' &&  window.localStorage.getItem('airportcode')!=null) {
     code =  window.localStorage.getItem('airportcode');
-
 }
 
 else{
 //alert("No preferred airport code has been set. Please set up a preferred code in Settings -> Set preferred airport.");
-
 window.location.replace('settings.html');
-return;
 //code = "IAD";
 }
 
