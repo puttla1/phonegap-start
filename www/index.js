@@ -184,7 +184,7 @@ else if (typeof window.localStorage.getItem('airportcode')!== 'undefined' &&  wi
      }
 else{
 alert("No preferred airport code has been set. Please set up a preferred code in Settings -> Set preferred airport.");
-window.location.href = 'settings.html';
+window.location.replace('settings.html');
 code = "IAD";
 }
 
