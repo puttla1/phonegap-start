@@ -187,6 +187,7 @@ else{
 //alert("No preferred airport code has been set. Please set up a preferred code in Settings -> Set preferred airport.");
 
 window.location.replace('settings.html');
+return;
 //code = "IAD";
 }
 
