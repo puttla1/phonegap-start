@@ -19,6 +19,7 @@
   <script src="js/maps.js"></script>
   <script src="js/color.js"></script>
   <script src="js/filter.js"></script>
+  <script src="js/fastclick.js"></script>
   <script>
       $(function() {
     $("select").change(function() {
@@ -68,7 +69,8 @@
   }
   </style>
 </head>
-<body>
+<body onload=initFastButtons();>
+<span id="fastclick">
 <div data-role="page" id="demo-page" data-theme="d">
     <div id="header" style="z-index:500;width:100%;background-color: #e5e5e5" data-role="header" data-tap-toggle="false" data-position="fixed" data-fullscreen="false"  >
       <button  data-icon="refresh" data-iconpos="notext" onclick=unfilter(); ></button>
@@ -767,6 +769,7 @@
                            <!-- Footer content here. -->
                                       </div>
 </div>
+</span>
 </body>
 </html>
 
