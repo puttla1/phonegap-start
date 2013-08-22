@@ -21,6 +21,66 @@
   <script src="js/filter.js"></script>
   <script src="js/fastclick.js"></script>
   <script>
+function parseTitle(cond)
+  {
+    var n = cond.split(" ");
+
+    var str = n[0];
+    var i;
+    for(i = 1; i < n.length - 1; i++)
+      str += (" " + n[i]);
+
+    return str;
+  } 
+  function parseTime(str)
+  {
+    var hour = parseInt(str.substring(0,2));
+    var min = parseInt(str.substring(2,4));
+    var minute = "";
+    if(min < 10)
+      minute = "0" + min;
+    else
+      minute = String(min);
+    var s = "";
+    if(hour > 12)
+      s = (hour-12) + ":" + minute + "PM ";
+    else
+      s = hour + ":" + minute + "AM ";
+
+    if(str.length > 4) 
+      s += "(Estimated)";
+
+    return s;
+
+  }
+  function startDate(cond)
+  {
+    var n = cond.split(" ");
+    var stro = n[n.length-1];
+
+    var a = stro.split("-");
+
+    var str = a[0];
+
+    s = "Start Date: " + str.charAt(2) + str.charAt(3) + "/" + str.charAt(4) + str.charAt(5) + "/" + str.charAt(0) + str.charAt(1) + " at " + parseTime(str.substring(6));
+
+    return s;
+
+  }
+  function endDate(cond)
+  {
+    var n = cond.split(" ");
+    var stro = n[n.length-1];
+
+    var a = stro.split("-");
+    var str = a[1];
+    if(str == "PERM") return "End Date: NONE";
+
+    s = "End Date: " + str.charAt(2) + str.charAt(3) + "/" + str.charAt(4) + str.charAt(5) + "/" + str.charAt(0) + str.charAt(1) + " at " + parseTime(str.substring(6));
+    return s;
+  }
+  </script>
+  <script>
       $(function() {
     $("select").change(function() {
       var code  = $(this).val();
@@ -40,7 +100,7 @@
           for(i = 0; i < max; i++)
           {
             eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
-            eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (i+1) + '\\\').toggle();$(\\\'#title' + (i+1) + '\\\').toggle();$(\\\'#content' + (i+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (i+1) + '\\\"><p id=\\\"title' + (i+1) + '\\\" class =\\\"card-title\\\">' + code + "-\' + data.contents.NOTAMs.Airports." + code + "[i].NOTAMNumber + \"</p><p id=\\\"content" + (i+1) + "\\\">\" + data.contents.NOTAMs.Airports." + code + "[i].Domestic + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (i+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
+            eval('$(\"#col1\").append(\'<li><div onclick=\\\"$(\\\'#img' + (i+1) + '\\\').toggle();$(\\\'#title' + (i+1) + '\\\').toggle();$(\\\'.content' + (i+1) + '\\\').toggle()\" class =\\\"card\\\" id = \\\"card' + (i+1) + '\\\"><p id=\\\"title' + (i+1) + '\\\" class =\\\"card-title\\\">' +  "\' + parseTitle(data.contents.NOTAMs.Airports." + code + "[i].Condition) + \"</p><p class=\\\"content" + (i+1) + "\\\">\" + startDate(data.contents.NOTAMs.Airports." + code + "[i].Domestic) + \"</p><p class=\\\"content" + (i+1) + "\\\">\" + endDate(data.contents.NOTAMs.Airports." + code + "[i].Domestic) + \"</p> <img style=\\\" margin-left:auto; margin-right: auto;display:block;\\\" id=\\\"img" + (i+1) + "\\\" src=\\\"" + imgurl + "\\\"> </div></li>\");");
             eval("hidePoint(data.contents.NOTAMs.Airports."+ code + "[i].Geometry, \"img\" + (i+1));");
           }
 
@@ -72,7 +132,7 @@
 <body> 
 <div data-role="page" id="demo-page" data-theme="d">
     <div id="header" style="z-index:500;width:100%;background-color: #e5e5e5" data-role="header" data-tap-toggle="false" data-position="fixed" data-fullscreen="false"  >
-      <button  data-icon="refresh" data-iconpos="notext" onclick=unfilter(); ></button>
+      <button data-icon="refresh"  data-iconpos="notext" onclick=unfilter(); ></button>
 	<h1 id="headtop"> </h1>
         <!--<a href="#left-panel" data-theme="d" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
         <a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a> -->
