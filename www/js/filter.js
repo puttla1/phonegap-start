@@ -98,7 +98,7 @@ function filter()
 
            if(i == max - 1 && onlycl == 0)
           {
-             alert("No NOTAMs with that class exist!"); 
+             alert("No NOTAMs with that keyword exist!"); 
             eval("$(\"#headtop\").empty().append(\"Filtered NOTAMs: 0\")");
             document.getElementById("notname").value = '';
             document.getElementById("cond").value = '';
