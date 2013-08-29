@@ -53,6 +53,7 @@ function filter()
 
         else if((cond != null && cond != "") && (cl == null || cl == ""))
         {
+          cond = cond.toUpperCase();
            if(notcond.indexOf(cond) >= 0)  
            {
             eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
@@ -119,6 +120,7 @@ function filter()
 
         else if((cond != null && cond != "") && (cl != null && cl != ""))
         {
+          cond.toUpperCase();
            if(notcond.indexOf(cond) >= 0 && notcl.toUpperCase() == cl.toUpperCase())  
            {
             eval("var imgurl = findUrl(\"" + code + "\"," + "data.contents.NOTAMs.Airports." + code + "[i].Geometry, lat, longi)");
